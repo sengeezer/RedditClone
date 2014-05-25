@@ -28,7 +28,6 @@ body {
 /* Custom page header */
 .header {
     border-bottom: 1px solid #e5e5e5;
-
     /* Make the masthead heading the same height as the navigation */
     h3 {
         margin-top: 0;
@@ -45,49 +44,49 @@ body {
     border-top: 1px solid #e5e5e5;
 }
 
-.container-narrow > hr {
-    margin: 30px 0;
+header {
+  background-color:#a15542;
+  h3 {
+    color:#fff;
+  }
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-    .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-    }
+footer {
+  background-color:#fafafa;
 }
 
 /* Supporting marketing content */
 .marketing {
     margin: 40px 0;
-    p + h4 {
-        margin-top: 28px;
-    }
+    p + h4 { margin-top: 28px; }
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
+.articles {
+  article {
+    border: 1px solid #ccc;
+    h4 span.srclink {
+      font-size:0.6em;
+      color:#ccc;
     }
+    ul.attrlist {
+      list-style: none;
+      li {
+        margin-right:10px;
+      }
+  }
+}
 
+  /* Responsive: Portrait tablets and up */
+  @media screen and (min-width: 768px) {
+    .container { max-width: 730px; }
     /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
+    .header, .marketing, .footer {
+      padding-left: 0;
+      padding-right: 0;
     }
-
     /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
-
+    .header { margin-bottom: 30px; }
     /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
+    .jumbotron { border-bottom: 0; }
+  }
 }
