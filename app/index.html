@@ -36,29 +36,25 @@
         <div class="row">
             <div class="small-12 medium-9 large-10 columns">
                 <div class="articles">
-                    <article>
-                        <div class="row">
-                            <div class="small-1 column">
-                                <p>1</p>
-                            </div>
-                            <div class="small-1 column">
-                                <input type="number" id="stepper1" name="stepper1" min="1" max="10" value="5" />
-                            </div>
-                            <div class="small-1 column">
-                                <img src="http://placehold.it/75x75&text=icon">
-                            </div>
-                            <div class="small-9 columns">
-                                <h4>Alle Katzen lieben Elvis Presley <span class="srclink">(de.wikipedia.org)</span></h4>
-                                <h5 class="subheader">submitted 6 hours ago by CarlPerkins</h5>
-                                <ul class="attrlist clearfix">
-                                    <li class="left">100 comments</li>
-                                    <li class="left">share</li>
-                                    <li class="left">save</li>
-                                    <li class="left">hide</li>
-                                    <li class="left">report</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <article id="article-01" class="clearfix">
+                        <section class="left ranking">
+                            <p>1</p>
+
+                            <input type="number" id="stepper" name="stepper" min="1" max="10" value="5" />
+                        </section>
+                        <section class="right content">
+                            <img src="http://placehold.it/75x75&text=icon">
+
+                            <h4>Alle Katzen lieben Elvis Presley <span class="srclink">(de.wikipedia.org)</span></h4>
+                            <h5 class="subheader">submitted <date>6 hours</date> ago by CarlPerkins</h5>
+                            <ul class="attrlist clearfix">
+                                <li class="left">100 comments</li>
+                                <li class="left">share</li>
+                                <li class="left">save</li>
+                                <li class="left">hide</li>
+                                <li class="left">report</li>
+                            </ul>
+                        </section>
                     </article>
                     <div class="panel clearfix">
                         <p>View more: </p>
@@ -68,8 +64,20 @@
                 </div>
             </div>
             <div class="small-12 medium-3 large-2 columns">
-                <h4>Sidebar</h4>
-                <a href="#" class="button small">Submit article</a>
+                <h4>Artikel hinzufügen</h4>
+                <form name="form" method="post" onsubmit="return addNewArticle()">
+                    <input id="img" name="img" type="file">
+                    <div class="hint">This image has to be in the "img" folder of this App.</div>
+                    <br>
+                    <label for="href">Link</label>
+                    <input id="href" name="href">
+                    <br>
+                    <label for="caption">Link Beschreibung</label>
+                    <input id="caption" name="caption">
+                    <br>
+                    <input type="submit" value="Hinzufügen">
+                </form>
+                <!-- <a href="#" class="button small">Submit article</a> -->
                 <hr>
                 <div class="panel">
                     <h5>Weitere Informationen</h5>
