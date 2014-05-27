@@ -65,20 +65,37 @@
             </div>
             <div class="small-12 medium-3 large-2 columns">
                 <h4>Artikel hinzufügen</h4>
-                <form name="form" method="post" onsubmit="return addNewArticle()">
-                    <input id="img" name="img" type="file">
-                    <div class="hint">This image has to be in the "img" folder of this App.</div>
-                    <br>
-                    <label for="href">Link</label>
-                    <input id="href" name="href">
-                    <br>
-                    <label for="caption">Link Beschreibung</label>
-                    <input id="caption" name="caption">
-                    <br>
-                    <input type="submit" value="Hinzufügen">
-                </form>
                 <!-- <a href="#" class="button small">Submit article</a> -->
+                <form name="form" method="post" onsubmit="return addNewArticle()">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <input id="img" name="img" type="file">
+                            <div class="hint">This image has to be in the "img" folder of this App.</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <label>Link
+                                <input id="href" name="href">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <label>Link Beschreibung
+                                <input id="caption" name="caption">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <input type="submit" value="Hinzufügen">
+                        </div>
+                    </div>
+                </form>
+
                 <hr>
+
                 <div class="panel">
                     <h5>Weitere Informationen</h5>
                     <ul>
