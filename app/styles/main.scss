@@ -77,6 +77,18 @@ footer {
     }
     section.content {
       margin-left:25px;
+      img {
+        float:left;
+        margin-bottom:100px;
+        margin-right:25px;
+      }
+    }
+    section.ranking {
+
+      p, input {
+        display:inline-block;
+        width:50px;
+      }
     }
   }
 }
