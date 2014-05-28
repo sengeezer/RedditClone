@@ -61,19 +61,23 @@ footer {
     p + h4 { margin-top: 28px; }
 }
 
-.articles {
+#articles {
   article {
     border: 1px solid #ccc;
     margin: 15px 0;
     h4 span.srclink {
-      font-size:0.6em;
-      color:#ccc;
+      font-size: 0.6em;
+      color: #ccc;
     }
     ul.attrlist {
       list-style: none;
       li {
-        margin-right:10px;
+        margin-right: 10px;
       }
+    }
+    section.content {
+      margin-left:25px;
+    }
   }
 }
 
@@ -90,4 +94,4 @@ footer {
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron { border-bottom: 0; }
   }
-}
+
