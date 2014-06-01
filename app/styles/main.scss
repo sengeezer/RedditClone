@@ -23,7 +23,8 @@ header, footer {
 }
 
 header {
-  background-color:#a15542;
+  background-color:#6d0019; /* for older browsers */
+  background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
   border-bottom: 1px solid #e5e5e5;
   h2 {
     margin-top: 0;
@@ -48,13 +49,15 @@ footer {
     h4 {
       display:inline;
       span.srclink {
-        font-size: 0.6em;
+        font-size: 0.8em;
         color: #ccc;
         display:inline;
       }
     }
+    h4, h5 { font-size:0.9em; }
 
     section.content {
+      width: 80%;
       margin-left:25px;
       img {
         float:left;
