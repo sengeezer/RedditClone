@@ -1,3 +1,9 @@
+$(document).ready(function() {
+  console.log( "The DOM is now loaded and can be manipulated." );
+});
+
+
+
 var valHref = document.form.href.value;
 var valCaption = document.form.caption.value;
 var date = timeSince(new Date);
