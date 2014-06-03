@@ -57,25 +57,79 @@
                 <section class="left comments clearfix">
                     <h5>all <span class="number">10</span> comments</h5>
                     <hr>
-                    <p>sorted by: best</p>
-                    <p><i>comment form</i></p>
-                    <div class="comment">
-                        <ul class="inline-list">
-                            <li>Up/down</li>
-                            <li>Collapse</li>
-                            <li>username</li>
-                            <li>points</li>
-                        </ul>
+
+                    <div class="row">
+                        <div class="small-4 medium-2 columns">
+                            <label>sorted by:
+                                <select>
+                                    <option value="best">best</option>
+                                    <option value="top">top</option>
+                                    <option value="new">new</option>
+                                    <option value="hot">hot</option>
+                                    <option value="controversial">controversial</option>
+                                    <option value="old">old</option>
+                                </select>
+                            </label>
+                        </div>
                     </div>
-                    <p><i>More comments</i></p>
-                    <blockquote>Nested comment</blockquote>
+                    <div class="row">
+                        <div class="small-9 medium-7 columns">
+                            <form name="comment-submit">
+                                <textarea placeholder="comment"></textarea>
+                                <a href="#" class="button tiny" id="submit-comment">Save</a>
+
+                            </form>
+                            <ul class="inline-list attrlist">
+                                <li><a href="#">formatting help</a></li>
+                                <li><a href="#">reddiquette</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <ul class="inline-list attrlist">
+                            <li><input type="number" id="stepper1" name="comment-stepper" min="1" max="10" value="5" /></li>
+                            <li><a href="#" id="comment-collapse-01">[+]</a></li>
+                            <li>CarlPerkins</li>
+                            <li>100 points</li>
+                            <li>6 hours ago</li>
+                        </ul>
+                        <p>What an insightful post!</p>
+                    </div>
+
+                    <blockquote>
+                        <div class="comment">
+                            <ul class="inline-list attrlist">
+                                <li><input type="number" id="stepper2" name="comment-stepper" min="1" max="10" value="5" /></li>
+                                <li><a href="#" id="comment-collapse-02">[+]</a></li>
+                                <li>Dave</li>
+                                <li>100 points</li>
+                                <li>6 hours ago</li>
+                            </ul>
+                            <p>Rubbish!</p>
+                        </div>
+                        <blockquote>
+                            <div class="comment">
+                                <ul class="inline-list attrlist">
+                                    <li><input type="number" id="stepper3" name="comment-stepper" min="1" max="10" value="5" /></li>
+                                    <li><a href="#" id="comment-collapse-03">[+]</a></li>
+                                    <li>Sarney</li>
+                                    <li>100 points</li>
+                                    <li>6 hours ago</li>
+                                </ul>
+                                <p>Duck soup</p>
+                            </div>
+
+                        </blockquote>
+                    </blockquote>
+
+                    <p><a href="#">Load more comments</a></p>
+
                 </section>
             </article>
         </div>
     </div>
     <div class="small-12 medium-3 large-2 columns">
-
-
         <div class="panel">
             <h4 class="rc">Weitere Informationen</h4>
             <ul>
