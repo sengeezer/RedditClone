@@ -59,9 +59,13 @@
                     <hr>
 
                     <div class="row">
-                        <div class="small-4 medium-2 columns">
-                            <label>sorted by:
-                                <select>
+                        <div class="small-8 medium-8 columns">
+                            <div class="row">
+                            <div class="small-2 medium-2 columns">
+                                <label for="right-label" class="right">sort by:</label>
+                            </div>
+                            <div class="small-6 medium-6 columns">
+                                <select id="right-label">
                                     <option value="best">best</option>
                                     <option value="top">top</option>
                                     <option value="new">new</option>
@@ -69,20 +73,27 @@
                                     <option value="controversial">controversial</option>
                                     <option value="old">old</option>
                                 </select>
-                            </label>
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="small-9 medium-7 columns">
                             <form name="comment-submit">
                                 <textarea placeholder="comment"></textarea>
-                                <a href="#" class="button tiny" id="submit-comment">Save</a>
-
+                                <div class="row">
+                                    <div class="small-1 medium-1 columns">
+                                        <a href="#" class="button tiny" id="submit-comment">Save</a>
+                                    </div>
+                                    <div class="small-8 medium-6 columns">
+                                        <ul class="inline-list attrlist">
+                                            <li><a href="#">formatting help</a></li>
+                                            <li><a href="#">reddiquette</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </form>
-                            <ul class="inline-list attrlist">
-                                <li><a href="#">formatting help</a></li>
-                                <li><a href="#">reddiquette</a></li>
-                            </ul>
+
                         </div>
                     </div>
 

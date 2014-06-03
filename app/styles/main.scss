@@ -85,6 +85,18 @@ footer {
     section.comments {
       width:100%;
       padding:10px 25px;
+      .comment {
+        position: relative;
+        p {
+          position: absolute;
+          top: 25px;
+          left:120px;
+          font-size:0.9em;
+        }
+        input {
+          width: 4em;
+        }
+      }
     }
   }
 }
