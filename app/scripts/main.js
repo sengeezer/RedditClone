@@ -1,9 +1,8 @@
-
-var date = timeSince(new Date);
-// var noArticles = 1;
-
+/*jshint strict: true */
 $(document).ready(function() {
-    $('#submit-new-article').on('click', onClick);
+    "use strict";
+    var date = timeSince(new Date());
+    var noArticles = 1;
 
     var addImgValToClonedArticle = function (article) {
         var imgVal = $('#img').val();
@@ -37,12 +36,15 @@ $(document).ready(function() {
         newArticle = addImgValToClonedArticle(newArticle);
         newArticle = addCaptionValToClonedArticle(newArticle);
         newArticle = addHrefValToClonedArticle(newArticle);
+        noArticles++;
+        $(newArticle).attr('id', 'article-0' + noArticles);
 
-        newArticle.prependTo(articles);
+        $(article).before(newArticle);
 
         return false;
     }
 
+    $('#submit-new-article').on('click', onClick);
 // Check on noArticles after use
 // console.log(noArticles);
 
@@ -52,29 +54,29 @@ $(document).ready(function() {
         var interval = Math.floor(seconds / 31536000);
 
         if (interval > 1) {
-            return interval + " years";
+            return interval + ' years';
         }
 
         interval = Math.floor(seconds / 2592000);
         if (interval > 1) {
-            return interval + " months";
+            return interval + ' months';
         }
 
         interval = Math.floor(seconds / 86400);
         if (interval > 1) {
-            return interval + " days";
+            return interval + ' days';
         }
 
         interval = Math.floor(seconds / 3600);
         if (interval > 1) {
-            return interval + " hours";
+            return interval + ' hours';
         }
 
         interval = Math.floor(seconds / 60);
         if (interval > 1) {
-            return interval + " minutes";
+            return interval + ' minutes';
         }
 
-        return Math.floor(seconds) + " seconds";
+        return Math.floor(seconds) + ' seconds';
     }
 });
