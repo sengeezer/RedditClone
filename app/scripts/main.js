@@ -44,6 +44,26 @@ $(document).ready(function() {
         return false;
     }
 
+    /* render when:
+        1. Page first loads
+        2. Article is added
+        3. Article rank changes
+    */
+    function renderArticles(changedIdx,changedDir){
+        var order = [];
+        $('#articles article').each(function(index){
+            order.push($(this));
+        });
+
+        if (changedIdx !== null){
+            // rearrange items based on index to be changed
+            var newIdx = changedIdx + changedDir;
+            $(order[changedIdx]).replaceWith(newIdx);
+        }
+
+        $('#articles').html(order);
+    }
+
     $('#submit-new-article').on('click', onClick);
 // Check on noArticles after use
 // console.log(noArticles);
