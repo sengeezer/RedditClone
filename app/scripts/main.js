@@ -44,6 +44,28 @@ $(document).ready(function() {
         return false;
     }
 
+    /*
+        Creating article list,
+        preparing for rendering
+    */
+
+    var articleList = [];
+    var defaultRank = 1;
+    // populate articleList with existing content
+    function frontArticle(text,link) {
+        this.id = noArticles++;
+        this.rank = defaultRank;
+        this.text = text;
+        this.link = link;
+        this.comments = [];
+    }
+
+    var article01 = new frontArticle("monocultures rock","http://nasa.gov");
+    var article02 = new frontArticle("cultural happenings", "http://boston.com");
+
+    articleList.push(article01);
+    articleList.push(article02);
+
     /* render when:
         1. Page first loads
         2. Article is added
