@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     articleList.push(article01);
     articleList.push(article02);
-
+    console.log(articleList);
     /* render when:
      1. Page first loads
      2. Article is added
@@ -41,17 +41,18 @@ $(document).ready(function() {
     // should really be using hogan or handlebars, html put through http://www.htmlescape.net/stringescape_tool.html for now
 
     function renderArticles() {
-        var order = "";
-        $(articleList).each(function (index) {
-            $(order).append(
-            "\x3Carticle id=\"article-"+ index.id + "\" class=\"clearfix\"\x3E\n"+
+        var order = [];
+        $(articleList).each(function (index, element) {
+            console.log("idx: " + index + " element text: " + element.text);
+            order.push(
+            "\x3Carticle id=\"article-"+ element.id + "\" class=\"clearfix\"\x3E\n"+
                 "\x3Csection class=\"left ranking\"\x3E\n"+
                 "\x3Cp\x3E1\x3C\x2Fp\x3E\n"+
                 "\x3Cinput type=\"number\" min=\"1\" max=\"10\" value=\"5\" \x2F\x3E\n"+
                 "\x3C\x2Fsection\x3E\n"+
                 "\x3Csection class=\"left content\"\x3E\n"+
-                "\x3Cimg src=\""+ index.image + "\"\x3E\n"+
-                "\x3Ch4\x3E"+ index.text + "\x3Ca href=\""+ index.link + "\" target=\"_blank\" class=\"srclink\"\x3E(link target)\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n"+
+                "\x3Cimg src=\""+ element.image + "\"\x3E\n"+
+                "\x3Ch4\x3E"+ element.text + "\x3Ca href=\""+ element.link + "\" target=\"_blank\" class=\"srclink\"\x3E(link target)\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n"+
                 "\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n"+
                 "\x3Cul class=\"inline-list attrlist\"\x3E\n"+
                 "\x3Cli\x3E\x3Ca href=\"article.html\"\x3E100 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
@@ -63,9 +64,10 @@ $(document).ready(function() {
                 "\x3C\x2Fsection\x3E\n"+
                 "\x3C\x2Farticle\x3E"
             );
+            // console.log(order);
         });
 
-        $('#articles').html(order);
+        $('#articles').html(order.join(""));
     }
 
     function submitArticle() {
@@ -74,6 +76,7 @@ $(document).ready(function() {
     }
 
     // renderWhen:1
+    console.log("renderWhen:1");
     renderArticles();
 
     $('#submit-new-article').on('click', submitArticle);
