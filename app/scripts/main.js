@@ -4,44 +4,92 @@ $(document).ready(function() {
     var date = timeSince(new Date());
     var noArticles = 1;
 
-    var addImgValToClonedArticle = function (article) {
-        var imgVal = $('#img').val();
+    var newId = function() {
+      noArticles++;
+      return 'article-0' + noArticles
+    };
+
+    var newCaption = function() {
+      return $('#caption').val();
+    };
+
+    var newImg = function() {
+      return $('#img').val();
+    };
+
+    var newHref = function() {
+      return $('#href').val();
+    };
+
+    var addImgValToClonedArticle = function (article, imgVal) {
         if (imgVal.length > 0) {
             article.find('img').attr('src', imgVal);
         }
         return article;
     };
 
-    var addCaptionValToClonedArticle = function (article) {
-        var captionVal = $('#caption').val();
+    var addCaptionValToClonedArticle = function (article, captionVal) {
         if (captionVal.length > 0) {
             article.find('h4').text(captionVal);
-
         }
         return article;
     };
 
-    var addHrefValToClonedArticle = function (article) {
-        var hrefVal = $('#href').val();
+    var addHrefValToClonedArticle = function (article, hrefVal) {
         if (hrefVal.length > 0) {
             article.find('.srclink').attr('href', hrefVal).text('(' + hrefVal + ')');
         }
         return article;
     };
 
-    function onClick() {
-        var article = $('#articles article').first();
+    var addIdToClonedArticle = function (article, id) {
+        if (id.length > 0) {
+            article.attr('id', id);
+        }
+        return article;
+    };
+
+    var addCommentsToClonedArticle = function (article, comments) {
+        if (comments.length > 0) {
+          article.append('<ul></ul>');
+          for(var i = 0; i < comments.length; i++) {
+            var newList = article.find('ul');
+            var newListItem = '<li>' + comments[i] + '<li>';
+            newList.append(newListItem);
+          };
+        };
+        return article;
+    };
+
+    var showLinks = function(links) {
+      var article = $('#articles article').first();
+
+      for(var i = 0; i < links.length; i++) {
         var newArticle = article.clone();
 
-        newArticle = addImgValToClonedArticle(newArticle);
-        newArticle = addCaptionValToClonedArticle(newArticle);
-        newArticle = addHrefValToClonedArticle(newArticle);
-        noArticles++;
-        $(newArticle).attr('id', 'article-0' + noArticles);
-
+        var newArticle = addImgValToClonedArticle(newArticle, links[i].img );
+        var newArticle = addCaptionValToClonedArticle(newArticle, links[i].caption);
+        var newArticle = addHrefValToClonedArticle(newArticle, links[i].href);
+        var newArticle = addIdToClonedArticle(newArticle, links[i].id);
+        //var newArticle = addCommentsToClonedArticle(newArticle, links[i].comments);
         $(article).before(newArticle);
+      }
+    };
+    function onClick() {
+      var linkList = [];
 
-        return false;
+      var newLink = {
+        id: newId(),
+        img: newImg(),
+        caption: newCaption(),
+        href: newHref(),
+        comments: ['asdf'],
+      };
+
+      linkList.push(newLink);
+      showLinks(linkList);
+
+      return false;
     }
 
     /* render when:
