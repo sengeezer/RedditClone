@@ -4,9 +4,9 @@ $(document).ready(function() {
 
     var noArticles = 1;
 
-    var imgVal = $('#img').val();
-    var captionVal = $('#caption').val();
-    var hrefVal = $('#href').val();
+    var imgVal = "";
+    var captionVal = "";
+    var hrefVal = "";
 
     /*
      Creating article list,
@@ -20,7 +20,7 @@ $(document).ready(function() {
         this.id = noArticles++;
         this.rank = defaultRank;
         this.text = text;
-        this.image = image || "img/default.png";
+        this.image = image || "http://placehold.it/75x75&text=icon";
         this.link = link;
         this.comments = [];
     }
@@ -71,8 +71,13 @@ $(document).ready(function() {
     }
 
     function submitArticle() {
+        imgVal = $('#img').val();
+        captionVal = $('#caption').val();
+        hrefVal = $('#href').val();
+
         articleList.push(new frontArticle(captionVal, hrefVal, imgVal));
         renderArticles(); // renderWhen:2
+        return false;
     }
 
     // renderWhen:1
