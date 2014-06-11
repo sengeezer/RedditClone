@@ -52,7 +52,7 @@ $(document).ready(function() {
                 "\x3C\x2Fsection\x3E\n"+
                 "\x3Csection class=\"left content\"\x3E\n"+
                 "\x3Cimg src=\""+ element.image + "\"\x3E\n"+
-                "\x3Ch4\x3E"+ element.text + "\x3Ca href=\""+ element.link + "\" target=\"_blank\" class=\"srclink\"\x3E(link target)\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n"+
+                "\x3Ch4\x3E"+ element.text + " " + "\x3Ca href=\""+ element.link + "\" target=\"_blank\" class=\"srclink\"\x3E"+ "(" + element.link.slice(7) + ")" + "\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n"+
                 "\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n"+
                 "\x3Cul class=\"inline-list attrlist\"\x3E\n"+
                 "\x3Cli\x3E\x3Ca href=\"article.html\"\x3E100 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
