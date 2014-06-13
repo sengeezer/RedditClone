@@ -1,7 +1,11 @@
 'use strict';
-// generated on 2014-05-21 using generator-gulp-webapp 0.1.0
 
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    hogan = require('gulp-hogan-compile');
+
+var paths = {
+    templates: 'templates/**/*.html'
+};
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -22,6 +26,16 @@ gulp.task('scripts', function () {
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
+});
+
+gulp.task('hogan', function() {
+    gulp.src(paths.templates)
+        .pipe(hogan('templates.js', {
+            templateName: function(file) {
+                return 'templates/'+file.path.split('templates/')[1];
+            }
+        }))
+        .pipe(gulp.dest('app/scripts/'));
 });
 
 gulp.task('html', ['styles', 'scripts'], function () {
