@@ -38,12 +38,11 @@ $(document).ready(function() {
      3. Article rank changes
      */
 
-    // should really be using hogan or handlebars, html put through http://www.htmlescape.net/stringescape_tool.html for now
+    // html put through http://www.htmlescape.net/stringescape_tool.html
 
     function renderArticles() {
         var order = [];
         $(articleList).each(function (index, element) {
-            console.log("idx: " + index + " element text: " + element.text);
             order.push(
             "\x3Carticle id=\"article-"+ element.id + "\" class=\"clearfix\"\x3E\n"+
                 "\x3Csection class=\"left ranking\"\x3E\n"+
@@ -64,7 +63,6 @@ $(document).ready(function() {
                 "\x3C\x2Fsection\x3E\n"+
                 "\x3C\x2Farticle\x3E"
             );
-            // console.log(order);
         });
 
         $('#articles').html(order.join(""));
@@ -81,12 +79,9 @@ $(document).ready(function() {
     }
 
     // renderWhen:1
-    console.log("renderWhen:1");
+
     renderArticles();
 
     $('#submit-new-article').on('click', submitArticle);
-
-// Check on noArticles after use
-// console.log(noArticles);
 
 });
