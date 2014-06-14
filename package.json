@@ -1,6 +1,6 @@
 {
-  "name": "redditclone",
-  "version": "0.0.0",
+  "name": "herdit",
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "connect": "^2.14.4",
