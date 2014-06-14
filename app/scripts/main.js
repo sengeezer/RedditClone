@@ -1,5 +1,6 @@
 /*jshint strict: true */
-$(document).ready(function() {
+$.noConflict();
+jQuery(document).ready(function($) {
     "use strict";
 
     var noArticles = 1;
@@ -54,7 +55,7 @@ $(document).ready(function() {
                 "\x3Ch4\x3E"+ element.text + " " + "\x3Ca href=\""+ element.link + "\" target=\"_blank\" class=\"srclink\"\x3E"+ "(" + element.link.slice(7) + ")" + "\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n"+
                 "\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n"+
                 "\x3Cul class=\"inline-list attrlist\"\x3E\n"+
-                "\x3Cli\x3E\x3Ca href=\"article.html\"\x3E100 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
+                "\x3Cli\x3E\x3Ca href=\"article.html&id=" + index + "\"\x3E100 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
                 "\x3Cli\x3E\x3Ca href=\"#\"\x3Eshare\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
                 "\x3Cli\x3E\x3Ca href=\"#\"\x3Esave\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
                 "\x3Cli\x3E\x3Ca href=\"#\"\x3Ehide\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n"+
@@ -83,5 +84,20 @@ $(document).ready(function() {
     renderArticles();
 
     $('#submit-new-article').on('click', submitArticle);
+
+    // Allows efficient usage of multiple query strings per request
+    // credit: http://jquery-howto.blogspot.com/2009/09/get-url-parameters-values-with-jquery.html
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
 
 });
