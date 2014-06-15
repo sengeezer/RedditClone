@@ -32,7 +32,9 @@ jQuery(document).ready(function($) {
 
     articleList.push(article01);
     articleList.push(article02);
-    console.log(articleList);
+    // console.log(articleList);
+
+
     /* render when:
      1. Page first loads
      2. Article is added
@@ -48,7 +50,7 @@ jQuery(document).ready(function($) {
             '\x3Carticle id=\"article-' + element.id + '\" class=\"clearfix\"\x3E\n'+
                 '\x3Csection class=\"left ranking\"\x3E\n'+
                 '\x3Cp\x3E1\x3C\x2Fp\x3E\n'+
-                '\x3Cinput type=\"number\" min=\"1\" max=\"10\" value=\"5\" \x2F\x3E\n'+
+                '\x3Cinput type=\"number\" id=\"ar' + element.id + '\" min=\"1\" max=\"10\" value=\"5\" \x2F\x3E\n'+
                 '\x3C\x2Fsection\x3E\n'+
                 '\x3Csection class=\"left content\"\x3E\n'+
                 '\x3Cimg src=\""+ element.image + "\"\x3E\n'+
@@ -69,6 +71,26 @@ jQuery(document).ready(function($) {
         $('#articles').html(order.join(''));
     }
 
+    function reorderArticles(currArticles){
+        var newArticleOrder = [];
+        var tempObj = '';
+        currArticles.sort(function(a,b){
+            if(a.rank > b.rank){
+                tempObj = currArticles[a];
+                currArticles[a] = currArticles[b];
+                currArticles[b] = tempObj;
+            }
+            if(a.rank < b.rank){
+                console.log('right order');
+            }
+            else {
+                b.rank++;
+                reorderArticles(currArticles); // re-run to check
+            }
+        });
+        renderArticles(); // renderWhen:3
+    }
+
     function submitArticle() {
         imgVal = $('#img').val();
         captionVal = $('#caption').val();
@@ -81,10 +103,15 @@ jQuery(document).ready(function($) {
 
     $('#submit-new-article').on('click', submitArticle);
 
+    $('input[id|=ar]').on('change', function(){
+        var newVal = $(this).rank - $(this).val();
+        $(this).rank = newVal;
+
+        reorderArticles(articleList);
+    });
     // Allows efficient usage of multiple query strings per request
     // credit: http://jquery-howto.blogspot.com/2009/09/get-url-parameters-values-with-jquery.html
-    function getUrlVars()
-    {
+    function getUrlVars(){
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
         for(var i = 0; i < hashes.length; i++)
