@@ -1,0 +1,32 @@
+@import '../bower_components/foundation/scss/foundation/components/grid'
+@import url(http://fonts.googleapis.com/css?family=Indie+Flower|Poiret+One|Paytone+One)
+
+// Project settings
+@import settings
+
+// Mixins import
+@import mixins
+
+// Project base styles
+@import small/base
+
+// Project layout styles
+@import small/layout
+@import small/states
+
+// Project modules
+@import small/modules/article
+@import small/modules/inline_list
+@import small/modules/hint
+
+// IMPORT STYLESHEETS FOR MEDIUM VIEWPORT */
+@media #{$medium}
+  @import medium/base
+  @import medium/modules/article
+
+// IMPORT STYLESHEETS FOR LARGE VIEWPORT */
+@media #{$large}
+  @import large/base
+  @import large/layout
+  @import large/states
+  @import large/modules/article

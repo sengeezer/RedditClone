@@ -12,8 +12,8 @@
         <!-- endbower -->
         <!-- endbuild -->
 
-        <!-- build:css styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
+        <!-- build:css styles/application.css -->
+        <link rel="stylesheet" href="styles/application.css">
         <!-- endbuild -->
 
         <!-- build:js scripts/vendor/modernizr.js -->
@@ -28,13 +28,15 @@
         <div class="row">
             <div class="small-12 columns">
                 <header class="clearfix">
-                    <img src="http://placehold.it/100x100&text=logo" class="left">
-                    <h2 class="left">Reddit Clone</h2>
+                    <a href='/' id='logo'>
+                      <img src="images/reddit_clone_logo.svg">
+                      <h2>Reddit Clone</h2>
+                    </a>
                 </header>
             </div>
         </div>
         <div class="row">
-            <div class="small-12 medium-9 large-10 columns">
+            <div class="small-12 medium-7 large-8 columns">
                 <div id="articles">
                     <!--
                     <article id="article-01" class="clearfix">
@@ -65,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="small-12 medium-3 large-2 columns">
+            <div class="small-12 medium-5 large-4 columns">
                 <h4 class="rc">Artikel hinzufügen</h4>
                 <!-- <a href="#" class="button small">Submit article</a> -->
                 <form name="form">
@@ -100,10 +102,10 @@
 
                 <div class="panel">
                     <h4 class="rc">Weitere Informationen</h4>
-                    <ul>
-                        <li>Links</li>
-                        <li>Regeln</li>
-                        <li>Werbung</li>
+                    <ul class='inline-list'>
+                        <li><a href='#'>Links</a></li>
+                        <li><a href='#'>Regeln</a></li>
+                        <li><a href='#'>Werbung</a></li>
                     </ul>
                 </div>
             </div>
@@ -122,7 +124,7 @@
         <!-- endbower -->
         <!-- endbuild -->
 
-        <!-- build:js scripts/plugins.js -->
+        <!-- build:js scripts/plugins.js
         <script src="bower_components/foundation/js/foundation/foundation.js"></script>
         <script src="bower_components/foundation/js/foundation/foundation.abide.js"></script>
         <script src="bower_components/foundation/js/foundation/foundation.accordion.js"></script>
@@ -140,7 +142,7 @@
         <script src="bower_components/foundation/js/foundation/foundation.tab.js"></script>
         <script src="bower_components/foundation/js/foundation/foundation.tooltip.js"></script>
         <script src="bower_components/foundation/js/foundation/foundation.topbar.js"></script>
-        <!-- endbuild -->
+        endbuild -->
 
         <!-- build:js scripts/main.js -->
         <script src="scripts/main.js"></script>
