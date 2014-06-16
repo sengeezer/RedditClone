@@ -32,8 +32,6 @@ jQuery(document).ready(function($) {
 
     articleList.push(article01);
     articleList.push(article02);
-    // console.log(articleList);
-
 
     /* render when:
      1. Page first loads
@@ -72,41 +70,17 @@ jQuery(document).ready(function($) {
     }
 
     // From http://jsfiddle.net/dFNva/1/
-
     var sortBy = function(field, reverse, primer){
-        var key = function (x) {return primer ? primer(x[field]) : x[field]};
+        var key = function (x) {return primer ? primer(x[field]) : x[field];};
 
         return function (a,b) {
             var A = key(a), B = key(b);
             return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];
-        }
+        };
     };
 
     function reorderArticles(currArticles){
-
         currArticles.sort(sortBy('rank', true, parseInt));
-
-        /*
-        currArticles.sort(function(a,b){
-
-            if(a.rank > b.rank){
-                console.log('right order, a rank is ' + a.rank + ' and b rank is ' + b.rank + '\n' + 'currArticles[a]: ' + currArticles[0]);
-
-            }
-            if(a.rank < b.rank){
-                // console.log('right order, a rank is ' + a.rank + ' and b rank is ' + b.rank);
-                tempObj = currArticles[a];
-                currArticles[a] = currArticles[b];
-                currArticles[b] = tempObj;
-            }
-            else {
-                b.rank++;
-                reorderArticles(currArticles); // re-run to check
-            }
-
-        });
-        */
-
         renderArticles(); // renderWhen:3
     }
 
@@ -133,7 +107,7 @@ jQuery(document).ready(function($) {
         }
         return vars;
     }
-    // alert(getUrlVars());
+
     // renderWhen:1
     if (getUrlVars()['id'] === undefined){
         renderArticles();
@@ -141,7 +115,7 @@ jQuery(document).ready(function($) {
 
     $('#submit-new-article').on('click', submitArticle);
 
-    $('input[type="number"]').change(function(){
+    $('input[type="number"]').on('change', function(){
 
         var ovI = Math.abs($(this).attr('id').charAt(length-1));
         var oldVal = articleList[ovI].rank;
