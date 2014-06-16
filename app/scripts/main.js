@@ -71,10 +71,22 @@ jQuery(document).ready(function($) {
         $('#articles').html(order.join(''));
     }
 
+    // From http://jsfiddle.net/dFNva/1/
+
+    var sortBy = function(field, reverse, primer){
+        var key = function (x) {return primer ? primer(x[field]) : x[field]};
+
+        return function (a,b) {
+            var A = key(a), B = key(b);
+            return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];
+        }
+    };
+
     function reorderArticles(currArticles){
-        // var newArticleOrder = [];
-        // TODO: Try http://jsfiddle.net/dFNva/1/
-        var tempObj = '';
+
+        currArticles.sort(sortBy('rank', true, parseInt));
+
+        /*
         currArticles.sort(function(a,b){
 
             if(a.rank > b.rank){
@@ -93,9 +105,9 @@ jQuery(document).ready(function($) {
             }
 
         });
+        */
 
         renderArticles(); // renderWhen:3
-
     }
 
     function submitArticle() {
