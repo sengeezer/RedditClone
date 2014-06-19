@@ -1,0 +1,14 @@
+body {
+  font-family: $body-font-family;
+  background-color: $white;
+}
+
+header {
+  text-align: center;
+  img {
+    width: 100%;
+    max-width: rem-calc(400);
+  }
+}
+
+#logo { background: none; }

@@ -1,6 +1,7 @@
 // Override Foundation settings
 @import url(http://fonts.googleapis.com/css?family=Indie+Flower|Poiret+One|Paytone+One);
 @import "custom-settings";
+@import "custom-mixins";
 // bower:scss
 @import "../bower_components/foundation/scss/foundation.scss";
 // endbower
@@ -127,5 +128,34 @@ h4.rc {
   }
   /* Space out the masthead */
   header { margin-bottom: 30px; }
+}
+
+/* Other responsive styles */
+
+// Project base styles
+@import "small/base";
+
+// Project layout styles
+@import "small/layout";
+@import "small/states";
+
+// Project modules
+@import "small/modules/article";
+@import "small/modules/inline-list";
+@import "small/modules/hint";
+
+// MEDIUM VIEWPORT
+
+@media #{$medium}{
+  @import "medium/base";
+  @import "medium/modules/article";
+}
+
+// LARGE VIEWPORT
+@media #{$large}{
+  @import "large/base";
+  @import "large/layout";
+  @import "large/states";
+  @import "large/modules/article";
 }
 

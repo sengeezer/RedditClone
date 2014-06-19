@@ -1,0 +1,40 @@
+h2 { color: $pink; }
+
+input {
+  font-family: $header-font-family;
+  border: 0;
+  display: block;
+  margin-bottom: rem-calc(10);
+  width: 100%;
+}
+
+label { display: block; }
+
+body { font-size: rem-calc(18); }
+
+a, input {
+  background-color: $grey;
+  color: $white;
+  text-decoration: none;
+  line-height: auto;
+  &:hover {
+    background-color: $pink;
+    color: $white;
+  }
+  &:focus { outline: $black 1px solid; }
+  &:visited { opacity: 0.8; }
+}
+
+form {
+  background-color: $lemon;
+  padding: rem-calc(20);
+  input { margin-top: rem-calc(10); }
+}
+
+input[type='submit'] { font-size: rem-calc(20); }
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: $grey;
+}
