@@ -41,6 +41,23 @@ jQuery(document).ready(function($) {
 
     // html put through http://www.htmlescape.net/stringescape_tool.html
 
+    // TODO: Rewrite based on http://css-tricks.com/number-increment-buttons/
+    function activateNumberListener(){
+        $('section.ranking').on('change', 'input[type="number"]', function(){
+            var ovI = Math.abs($(this).attr('id').charAt(length-1));
+            var oldVal = articleList[ovI].rank;
+            var newVal = Math.abs(oldVal - $(this).val());
+
+            articleList[ovI].rank = newVal;
+
+            // $(this).val(newVal);
+
+            console.log('listener triggered, newval is ' + newVal);
+
+            reorderArticles(articleList);
+        });
+    }
+
     function renderArticles() {
         var order = [];
         $(articleList).each(function (index, element) {
@@ -48,7 +65,7 @@ jQuery(document).ready(function($) {
             '\x3Carticle id=\"article-' + element.id + '\" class=\"clearfix\"\x3E\n'+
                 '\x3Csection class=\"left ranking\"\x3E\n'+
                 '\x3Cp\x3E1\x3C\x2Fp\x3E\n'+
-                '\x3Cinput type=\"number\" id=\"ar' + element.id + '\" min=\"1\" max=\"10\" step=\"1\" value=\"5\" \x2F\x3E\n'+
+                '\x3Cinput type=\"number\" id=\"ar' + element.id + '\" min=\"1\" max=\"100\" step=\"1\" value=\"5\" \x2F\x3E\n'+
                 '\x3C\x2Fsection\x3E\n'+
                 '\x3Csection class=\"left content\"\x3E\n'+
                 '\x3Cimg src=\"' + element.image + '\"\x3E\n'+
@@ -67,6 +84,7 @@ jQuery(document).ready(function($) {
         });
 
         $('#articles').html(order.join(''));
+        activateNumberListener();
     }
 
     // From http://jsfiddle.net/dFNva/1/
@@ -81,6 +99,7 @@ jQuery(document).ready(function($) {
 
     function reorderArticles(currArticles){
         currArticles.sort(sortBy('rank', true, parseInt));
+        // console.log(currArticles);
         renderArticles(); // renderWhen:3
     }
 
@@ -115,16 +134,6 @@ jQuery(document).ready(function($) {
 
     $('#submit-new-article').on('click', submitArticle);
 
-    $('input[type="number"]').on('change', function(){
 
-        var ovI = Math.abs($(this).attr('id').charAt(length-1));
-        var oldVal = articleList[ovI].rank;
-        var newVal = Math.abs(oldVal - $(this).val());
-
-        articleList[ovI].rank = newVal;
-
-        console.log('Newval is ' + newVal);
-
-        reorderArticles(articleList);
-    });
+    activateNumberListener();
 });
