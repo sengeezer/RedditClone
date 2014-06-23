@@ -41,18 +41,26 @@ jQuery(document).ready(function($) {
 
     // html put through http://www.htmlescape.net/stringescape_tool.html
 
-    // TODO: Rewrite based on http://css-tricks.com/number-increment-buttons/
-    function activateNumberListener(){
-        $('section.ranking').on('change', 'input[type="number"]', function(){
-            var ovI = Math.abs($(this).attr('id').charAt(length-1));
-            var oldVal = articleList[ovI].rank;
-            var newVal = Math.abs(oldVal - $(this).val());
+    function activateNewNumberListener(){
+        $('.voter').on('click', 'a', function(e){
+            e.preventDefault();
+            var currRank = $(this).closest('article').attr('id');
+            var cRid = currRank.charAt(currRank.length - 1);
+            var oldVal = articleList[cRid - 1].rank;
+            var newVal = 'z';
 
-            articleList[ovI].rank = newVal;
+            if($(this).hasClass('up')){
+                console.log('up ' + cRid);
+                newVal = oldVal++;
+            }
+            else if ($(this).hasClass('down')){
+                console.log('down ' + cRid);
+                newVal = oldVal--;
+            }
 
-            // $(this).val(newVal);
+            // TODO: .rankno should display actual number of votes
 
-            console.log('listener triggered, newval is ' + newVal);
+            articleList[cRid - 1].rank = newVal;
 
             reorderArticles(articleList);
         });
@@ -65,7 +73,12 @@ jQuery(document).ready(function($) {
             '\x3Carticle id=\"article-' + element.id + '\" class=\"clearfix\"\x3E\n'+
                 '\x3Csection class=\"left ranking\"\x3E\n'+
                 '\x3Cp\x3E1\x3C\x2Fp\x3E\n'+
-                '\x3Cinput type=\"number\" id=\"ar' + element.id + '\" min=\"1\" max=\"100\" step=\"1\" value=\"5\" \x2F\x3E\n'+
+                '\x3Cdiv class=\"voter\"\x3E\n'+
+                '\x3Cul\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"#\" class=\"up\"\x3E+\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3Cli class=\"rankno\"\x3E5\x3C\x2Fli\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"#\" class=\"down\"\x3E-\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3C\x2Ful\x3E\n\x3C\x2Fdiv\x3E\n'+
                 '\x3C\x2Fsection\x3E\n'+
                 '\x3Csection class=\"left content\"\x3E\n'+
                 '\x3Cimg src=\"' + element.image + '\"\x3E\n'+
@@ -84,7 +97,7 @@ jQuery(document).ready(function($) {
         });
 
         $('#articles').html(order.join(''));
-        activateNumberListener();
+        activateNewNumberListener();
     }
 
     // From http://jsfiddle.net/dFNva/1/
@@ -118,8 +131,7 @@ jQuery(document).ready(function($) {
     function getUrlVars(){
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
+        for(var i = 0; i < hashes.length; i++) {
             hash = hashes[i].split('=');
             vars.push(hash[0]);
             vars[hash[0]] = hash[1];
@@ -135,5 +147,5 @@ jQuery(document).ready(function($) {
     $('#submit-new-article').on('click', submitArticle);
 
 
-    activateNumberListener();
+    activateNewNumberListener();
 });
