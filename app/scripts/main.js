@@ -29,9 +29,11 @@ jQuery(document).ready(function($) {
     // populate articleList with existing content
     var article01 = new frontArticle('monocultures rock', 'http://nasa.gov');
     var article02 = new frontArticle('cultural happenings', 'http://boston.com');
+    var article03 = new frontArticle('Gotthard', 'http://gotthard.com');
 
     articleList.push(article01);
     articleList.push(article02);
+    articleList.push(article03);
 
     /* render when:
      1. Page first loads
@@ -47,15 +49,15 @@ jQuery(document).ready(function($) {
             var currRank = $(this).closest('article').attr('id');
             var cRid = currRank.charAt(currRank.length - 1);
             var oldVal = articleList[cRid - 1].rank;
-            var newVal = 'z';
+            var newVal = '';
 
             if($(this).hasClass('up')){
-                console.log('up ' + cRid);
-                newVal = oldVal++;
+                newVal = oldVal + 1;
+                console.log('up ' + cRid + ' newVal is ' + newVal);
             }
             else if ($(this).hasClass('down')){
-                console.log('down ' + cRid);
-                newVal = oldVal--;
+                newVal = oldVal - 1;
+                console.log('down ' + cRid + ' newVal is ' + newVal);
             }
 
             // TODO: .rankno should display actual number of votes
@@ -72,11 +74,11 @@ jQuery(document).ready(function($) {
             order.push(
             '\x3Carticle id=\"article-' + element.id + '\" class=\"clearfix\"\x3E\n'+
                 '\x3Csection class=\"left ranking\"\x3E\n'+
-                '\x3Cp\x3E1\x3C\x2Fp\x3E\n'+
+                '\x3Cp\x3E' + element.id + '\x3C\x2Fp\x3E\n'+
                 '\x3Cdiv class=\"voter\"\x3E\n'+
                 '\x3Cul\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\" class=\"up\"\x3E+\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
-                '\x3Cli class=\"rankno\"\x3E5\x3C\x2Fli\x3E\n'+
+                '\x3Cli class=\"voteno\"\x3E5\x3C\x2Fli\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\" class=\"down\"\x3E-\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3C\x2Ful\x3E\n\x3C\x2Fdiv\x3E\n'+
                 '\x3C\x2Fsection\x3E\n'+

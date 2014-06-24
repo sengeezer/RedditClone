@@ -17,7 +17,6 @@ article {
       line-height: rem-calc(50);
     }
   }
-  // TODO: The very point of left is to float, remove class="float"
   .left { float: none !important; }
   input[type='number'] {
     font-size: rem-calc(20);
