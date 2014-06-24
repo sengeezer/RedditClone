@@ -146,6 +146,5 @@ jQuery(document).ready(function($) {
 
     $('#submit-new-article').on('click', submitArticle);
 
-
     activateNewNumberListener();
 });

@@ -6,6 +6,7 @@ input {
   display: block;
   margin-bottom: rem-calc(10);
   width: 100%;
+  font-size: rem-calc(20);
 }
 
 label { display: block; }
@@ -28,10 +29,14 @@ a, input {
 form {
   background-color: $lemon;
   padding: rem-calc(20);
+  margin-bottom: rem-calc(20);
   input { margin-top: rem-calc(10); }
 }
 
-input[type='submit'] { font-size: rem-calc(20); }
+input[type='submit'] {
+  font-size: rem-calc(20);
+  cursor: pointer;
+}
 
 hr {
   border: none;

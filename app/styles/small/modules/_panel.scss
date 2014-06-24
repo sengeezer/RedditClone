@@ -1,0 +1,9 @@
+.panel {
+  border: 1px solid $grey;
+  padding: rem-calc(20);
+  margin-bottom: rem-calc(20);
+}
+
+p, h4 { margin-top: 0; }
+
+.inline-list { margin-bottom: 0; }
