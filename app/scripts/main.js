@@ -8,18 +8,28 @@ jQuery(document).ready(function($) {
     var imgVal = '';
     var captionVal = '';
     var hrefVal = '';
+    var rankVal = '';
 
     /*
      Creating article list,
      preparing for rendering
      */
 
-    var articleList = [];
-    var defaultRank = 1;
+    // From MDN
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-    function frontArticle(text, link, image) {
+    var articleList = [];
+    var defaultScore = getRandomInt(1,25);
+
+    // TODO: Write ranking algorithm
+    var defaultRank = defaultScore;
+
+    function frontArticle(rank, text, link, image) {
         this.id = noArticles++;
-        this.rank = defaultRank;
+        this.rank = rank || defaultRank;
+        this.score = getRandomInt(1,25);
         this.text = text;
         this.image = image || 'http://placehold.it/75x75&text=icon';
         this.link = link;
@@ -27,9 +37,9 @@ jQuery(document).ready(function($) {
     }
 
     // populate articleList with existing content
-    var article01 = new frontArticle('monocultures rock', 'http://nasa.gov');
-    var article02 = new frontArticle('cultural happenings', 'http://boston.com');
-    var article03 = new frontArticle('Gotthard', 'http://gotthard.com');
+    var article01 = new frontArticle(1, 'monocultures rock', 'http://nasa.gov');
+    var article02 = new frontArticle(2, 'cultural happenings', 'http://boston.com');
+    var article03 = new frontArticle(3, 'Gotthard', 'http://gotthard.com');
 
     articleList.push(article01);
     articleList.push(article02);
@@ -38,17 +48,17 @@ jQuery(document).ready(function($) {
     /* render when:
      1. Page first loads
      2. Article is added
-     3. Article rank changes
+     3. Article score changes
      */
 
     // html put through http://www.htmlescape.net/stringescape_tool.html
 
-    function activateNewNumberListener(){
+    function activateNumberListener(){
         $('.voter').on('click', 'a', function(e){
             e.preventDefault();
-            var currRank = $(this).closest('article').attr('id');
-            var cRid = currRank.charAt(currRank.length - 1);
-            var oldVal = articleList[cRid - 1].rank;
+            var currScore = $(this).closest('article').attr('id');
+            var cRid = currScore.charAt(currScore.length - 1);
+            var oldVal = articleList[cRid - 1].score;
             var newVal = '';
 
             if($(this).hasClass('up')){
@@ -60,9 +70,9 @@ jQuery(document).ready(function($) {
                 console.log('down ' + cRid + ' newVal is ' + newVal);
             }
 
-            // TODO: .rankno should display actual number of votes
+            // TODO: .score should display actual number of votes
 
-            articleList[cRid - 1].rank = newVal;
+            articleList[cRid - 1].score = newVal;
 
             reorderArticles(articleList);
         });
@@ -74,11 +84,11 @@ jQuery(document).ready(function($) {
             order.push(
             '\x3Carticle id=\"article-' + element.id + '\" class=\"clearfix\"\x3E\n'+
                 '\x3Csection class=\"left ranking\"\x3E\n'+
-                '\x3Cp\x3E' + element.id + '\x3C\x2Fp\x3E\n'+
+                '\x3Cp class=\"rank\"\x3E' + element.rank + '\x3C\x2Fp\x3E\n'+
                 '\x3Cdiv class=\"voter\"\x3E\n'+
                 '\x3Cul\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\" class=\"up\"\x3E+\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
-                '\x3Cli class=\"voteno\"\x3E5\x3C\x2Fli\x3E\n'+
+                '\x3Cli class=\"score\"\x3E' + element.score + '\x3C\x2Fli\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\" class=\"down\"\x3E-\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3C\x2Ful\x3E\n\x3C\x2Fdiv\x3E\n'+
                 '\x3C\x2Fsection\x3E\n'+
@@ -99,7 +109,7 @@ jQuery(document).ready(function($) {
         });
 
         $('#articles').html(order.join(''));
-        activateNewNumberListener();
+        activateNumberListener();
     }
 
     // From http://jsfiddle.net/dFNva/1/
@@ -113,7 +123,7 @@ jQuery(document).ready(function($) {
     };
 
     function reorderArticles(currArticles){
-        currArticles.sort(sortBy('rank', true, parseInt));
+        currArticles.sort(sortBy('score', true, parseInt));
         // console.log(currArticles);
         renderArticles(); // renderWhen:3
     }
@@ -122,8 +132,9 @@ jQuery(document).ready(function($) {
         imgVal = $('#img').val();
         captionVal = $('#caption').val();
         hrefVal = $('#href').val();
+        rankVal = 4; // should be last rank in articles + 1
 
-        articleList.push(new frontArticle(captionVal, hrefVal, imgVal));
+        articleList.push(new frontArticle(rankVal, captionVal, hrefVal, imgVal));
         renderArticles(); // renderWhen:2
         return false;
     }
@@ -148,5 +159,5 @@ jQuery(document).ready(function($) {
 
     $('#submit-new-article').on('click', submitArticle);
 
-    activateNewNumberListener();
+    activateNumberListener();
 });
