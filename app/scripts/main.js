@@ -56,8 +56,12 @@ jQuery(document).ready(function($) {
     function activateNumberListener(){
         $('.voter').on('click', 'a', function(e){
             e.preventDefault();
-            var currScore = $(this).closest('article').attr('id');
-            var cRid = currScore.charAt(currScore.length - 1);
+
+            var currScore = $(this).closest('article').find('.score').text();
+
+            var currId = $(this).closest('article').attr('id');
+            var cRid = currId.charAt(currScore.length - 1);
+
             var oldVal = articleList[cRid - 1].score;
             var newVal = '';
 
