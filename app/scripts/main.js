@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
     var articleList = [];
     var defaultScore = getRandomInt(1,25);
 
-    // TODO: Write ranking algorithm
+    // TODO: Random score for first item, rest in descending order. Write ranking algorithm
     var defaultRank = defaultScore;
 
     function frontArticle(rank, text, link, image) {
@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
             var currScore = $(this).closest('article').find('.score').text();
 
             var currId = $(this).closest('article').attr('id');
-            var cRid = currId.charAt(currScore.length - 1);
+            var cRid = currId.charAt(currId.length - 1);
 
             var oldVal = articleList[cRid - 1].score;
             var newVal = '';
