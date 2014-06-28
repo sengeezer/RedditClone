@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
     // TODO: Random score for first item, rest in descending order. Write ranking algorithm
     var defaultRank = defaultScore;
 
-    function frontArticle(rank, text, link, image) {
+    function FrontArticle(rank, text, link, image) {
         this.id = noArticles++;
         this.rank = rank || defaultRank;
         this.score = getRandomInt(1,25);
@@ -37,9 +37,9 @@ jQuery(document).ready(function($) {
     }
 
     // populate articleList with existing content
-    var article01 = new frontArticle(1, 'monocultures rock', 'http://nasa.gov');
-    var article02 = new frontArticle(2, 'cultural happenings', 'http://boston.com');
-    var article03 = new frontArticle(3, 'Gotthard', 'http://gotthard.com');
+    var article01 = new FrontArticle(1, 'monocultures rock', 'http://nasa.gov');
+    var article02 = new FrontArticle(2, 'cultural happenings', 'http://boston.com');
+    var article03 = new FrontArticle(3, 'Gotthard', 'http://gotthard.com');
 
     articleList.push(article01);
     articleList.push(article02);
@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
         $('.voter').on('click', 'a', function(e){
             e.preventDefault();
 
-            var currScore = $(this).closest('article').find('.score').text();
+            // var currScore = $(this).closest('article').find('.score').text();
 
             var currId = $(this).closest('article').attr('id');
             var cRid = currId.charAt(currId.length - 1);
@@ -138,7 +138,7 @@ jQuery(document).ready(function($) {
         hrefVal = $('#href').val();
         rankVal = 4; // should be last rank in articles + 1
 
-        articleList.push(new frontArticle(rankVal, captionVal, hrefVal, imgVal));
+        articleList.push(new FrontArticle(rankVal, captionVal, hrefVal, imgVal));
         renderArticles(); // renderWhen:2
         return false;
     }
@@ -157,8 +157,9 @@ jQuery(document).ready(function($) {
     }
 
     // renderWhen:1
-    if (getUrlVars()['id'] === undefined){
-        renderArticles();
+    if (getUrlVars().id === undefined){
+        // renderArticles();
+        reorderArticles(articleList);
     }
 
     $('#submit-new-article').on('click', submitArticle);
