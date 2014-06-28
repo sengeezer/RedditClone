@@ -126,9 +126,16 @@ jQuery(document).ready(function($) {
         };
     };
 
+    // Reorder rank values after sorting by score
+    function reRank(element, index){
+        element.rank = parseInt(index + 1);
+    }
+
     function reorderArticles(currArticles){
-        currArticles.sort(sortBy('score', true, parseInt));
-        // console.log(currArticles);
+        currArticles.sort(sortBy('score', false, parseInt));
+
+        currArticles.forEach(reRank);
+
         renderArticles(); // renderWhen:3
     }
 
@@ -158,7 +165,6 @@ jQuery(document).ready(function($) {
 
     // renderWhen:1
     if (getUrlVars().id === undefined){
-        // renderArticles();
         reorderArticles(articleList);
     }
 
