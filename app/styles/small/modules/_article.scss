@@ -4,22 +4,24 @@ article {
   padding: rem-calc(20);
   margin-bottom: rem-calc(20);
   .ranking {
-    width: 100%;
     text-align: center;
     p {
       color: $pink;
-      border-bottom: rem-calc(5) solid $pink;
       padding-bottom: rem-calc(10);
       margin-top: 0;
-      font-size: rem-calc(70);
+      font-size: rem-calc(30);
       margin-bottom: rem-calc(20);
+      border-bottom: rem-calc(1) solid $pink;
+      height: rem-calc(50);
+      min-width: rem-calc(50);
+      line-height: rem-calc(50);
     }
   }
-  .left { float: none; }
+  .left { float: none !important; }
   input[type='number'] {
-    width: rem-calc(70);
     font-size: rem-calc(20);
     text-align: center;
-    margin-bottom: rem-calc(20);
+    width: auto;
+    margin: 0 auto rem-calc(20) auto;
   }
 }

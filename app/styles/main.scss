@@ -83,6 +83,17 @@ h4.rc {
   line-height: 18px;
 }
 
+.voter {
+  display:inline-block;
+  ul {
+    list-style:none;
+    padding:0;
+    li.score {
+      font-size: rem-calc(20);
+    }
+  }
+}
+
 /* Responsive styles */
 
 // Project base styles
@@ -96,6 +107,7 @@ h4.rc {
 @import "small/modules/article";
 @import "small/modules/inline-list";
 @import "small/modules/hint";
+@import "small/modules/panel";
 
 // Medium viewport
 

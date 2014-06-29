@@ -8,18 +8,28 @@ jQuery(document).ready(function($) {
     var imgVal = '';
     var captionVal = '';
     var hrefVal = '';
+    var rankVal = '';
 
     /*
      Creating article list,
      preparing for rendering
      */
 
-    var articleList = [];
-    var defaultRank = 1;
+    // From MDN
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-    function frontArticle(text, link, image) {
+    var articleList = [];
+    var defaultScore = getRandomInt(1,25);
+
+    // TODO: Random score for first item, rest in descending order. Write ranking algorithm
+    var defaultRank = defaultScore;
+
+    function FrontArticle(rank, text, link, image) {
         this.id = noArticles++;
-        this.rank = defaultRank;
+        this.rank = rank || defaultRank;
+        this.score = getRandomInt(1,25);
         this.text = text;
         this.image = image || 'http://placehold.it/75x75&text=icon';
         this.link = link;
@@ -27,19 +37,50 @@ jQuery(document).ready(function($) {
     }
 
     // populate articleList with existing content
-    var article01 = new frontArticle('monocultures rock', 'http://nasa.gov');
-    var article02 = new frontArticle('cultural happenings', 'http://boston.com');
+    var article01 = new FrontArticle(1, 'monocultures rock', 'http://nasa.gov');
+    var article02 = new FrontArticle(2, 'cultural happenings', 'http://boston.com');
+    var article03 = new FrontArticle(3, 'Gotthard', 'http://gotthard.com');
 
     articleList.push(article01);
     articleList.push(article02);
+    articleList.push(article03);
 
     /* render when:
      1. Page first loads
      2. Article is added
-     3. Article rank changes
+     3. Article score changes
      */
 
     // html put through http://www.htmlescape.net/stringescape_tool.html
+
+    function activateNumberListener(){
+        $('.voter').on('click', 'a', function(e){
+            e.preventDefault();
+
+            // var currScore = $(this).closest('article').find('.score').text();
+
+            var currId = $(this).closest('article').attr('id');
+            var cRid = currId.charAt(currId.length - 1);
+
+            var oldVal = articleList[cRid - 1].score;
+            var newVal = '';
+
+            if($(this).hasClass('up')){
+                newVal = oldVal + 1;
+                console.log('up ' + cRid + ' newVal is ' + newVal);
+            }
+            else if ($(this).hasClass('down')){
+                newVal = oldVal - 1;
+                console.log('down ' + cRid + ' newVal is ' + newVal);
+            }
+
+            // TODO: .score should display actual number of votes
+
+            articleList[cRid - 1].score = newVal;
+
+            reorderArticles(articleList);
+        });
+    }
 
     function renderArticles() {
         var order = [];
@@ -47,8 +88,13 @@ jQuery(document).ready(function($) {
             order.push(
             '\x3Carticle id=\"article-' + element.id + '\" class=\"clearfix\"\x3E\n'+
                 '\x3Csection class=\"left ranking\"\x3E\n'+
-                '\x3Cp\x3E1\x3C\x2Fp\x3E\n'+
-                '\x3Cinput type=\"number\" id=\"ar' + element.id + '\" min=\"1\" max=\"10\" step=\"1\" value=\"5\" \x2F\x3E\n'+
+                '\x3Cp class=\"rank\"\x3E' + element.rank + '\x3C\x2Fp\x3E\n'+
+                '\x3Cdiv class=\"voter\"\x3E\n'+
+                '\x3Cul\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"#\" class=\"up\"\x3E+\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3Cli class=\"score\"\x3E' + element.score + '\x3C\x2Fli\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"#\" class=\"down\"\x3E-\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3C\x2Ful\x3E\n\x3C\x2Fdiv\x3E\n'+
                 '\x3C\x2Fsection\x3E\n'+
                 '\x3Csection class=\"left content\"\x3E\n'+
                 '\x3Cimg src=\"' + element.image + '\"\x3E\n'+
@@ -67,6 +113,7 @@ jQuery(document).ready(function($) {
         });
 
         $('#articles').html(order.join(''));
+        activateNumberListener();
     }
 
     // From http://jsfiddle.net/dFNva/1/
@@ -79,8 +126,16 @@ jQuery(document).ready(function($) {
         };
     };
 
+    // Reorder rank values after sorting by score
+    function reRank(element, index){
+        element.rank = parseInt(index + 1);
+    }
+
     function reorderArticles(currArticles){
-        currArticles.sort(sortBy('rank', true, parseInt));
+        currArticles.sort(sortBy('score', false, parseInt));
+
+        currArticles.forEach(reRank);
+
         renderArticles(); // renderWhen:3
     }
 
@@ -88,8 +143,9 @@ jQuery(document).ready(function($) {
         imgVal = $('#img').val();
         captionVal = $('#caption').val();
         hrefVal = $('#href').val();
+        rankVal = 4; // should be last rank in articles + 1
 
-        articleList.push(new frontArticle(captionVal, hrefVal, imgVal));
+        articleList.push(new FrontArticle(rankVal, captionVal, hrefVal, imgVal));
         renderArticles(); // renderWhen:2
         return false;
     }
@@ -99,8 +155,7 @@ jQuery(document).ready(function($) {
     function getUrlVars(){
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
+        for(var i = 0; i < hashes.length; i++) {
             hash = hashes[i].split('=');
             vars.push(hash[0]);
             vars[hash[0]] = hash[1];
@@ -109,22 +164,11 @@ jQuery(document).ready(function($) {
     }
 
     // renderWhen:1
-    if (getUrlVars()['id'] === undefined){
-        renderArticles();
+    if (getUrlVars().id === undefined){
+        reorderArticles(articleList);
     }
 
     $('#submit-new-article').on('click', submitArticle);
 
-    $('input[type="number"]').on('change', function(){
-
-        var ovI = Math.abs($(this).attr('id').charAt(length-1));
-        var oldVal = articleList[ovI].rank;
-        var newVal = Math.abs(oldVal - $(this).val());
-
-        articleList[ovI].rank = newVal;
-
-        console.log('Newval is ' + newVal);
-
-        reorderArticles(articleList);
-    });
+    activateNumberListener();
 });
