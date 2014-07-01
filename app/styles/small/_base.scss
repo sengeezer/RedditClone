@@ -9,7 +9,10 @@ input {
   font-size: rem-calc(20);
 }
 
-label { display: block; }
+label {
+  display: block;
+  font-size: rem-calc(16)
+}
 
 body { font-size: rem-calc(18); }
 
@@ -42,4 +45,8 @@ hr {
   border: none;
   height: rem-calc(1);
   background-color: $grey;
+}
+
+.button.tiny {
+  font-size: rem-calc(16);
 }

@@ -3,8 +3,9 @@ article {
   color: $grey;
   padding: rem-calc(20);
   margin-bottom: rem-calc(20);
+
   .ranking {
-    text-align: center;
+    overflow: auto;
     p {
       color: $pink;
       padding-bottom: rem-calc(10);
@@ -15,13 +16,39 @@ article {
       height: rem-calc(50);
       min-width: rem-calc(50);
       line-height: rem-calc(50);
+      clear: both;
     }
   }
-  .left { float: none !important; }
-  input[type='number'] {
+
+  .rank {
+    float: left;
+    text-align: center;
+    width: 50%;
+    vertical-align: top;
+  }
+
+  img {
+    width: 100%;
+    padding-bottom: rem-calc(20);
+  }
+
+  .left {
+    float: none;
+    width: 100%;
+  }
+
+    input[type='number'] {
     font-size: rem-calc(20);
     text-align: center;
     width: auto;
     margin: 0 auto rem-calc(20) auto;
+  }
+
+  .attrlist {
+    margin-left: 0;
+
+    li {
+      margin-left: 0;
+    }
   }
 }

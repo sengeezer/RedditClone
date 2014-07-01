@@ -1,4 +1,25 @@
 article {
   background-color: $lemon;
   color: $grey;
+
+  a:hover {
+    background-color: $sea;
+  }
+
+  img {
+    float: left;
+    width: 48%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .content {
+    overflow: auto;
+  }
+
+  h4,
+  h5,
+  .attrlist {
+    width: 48%;
+    float: right;
+  }
 }

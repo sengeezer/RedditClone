@@ -2,34 +2,68 @@ article {
   background-color: $pink;
   color: $white;
 
-  .ranking, .content { float: left !important; }
-
-  h4, h5, .inline-list { float: left; }
-  h4 { margin-bottom: 0; }
-
-  img {
-    width: 25%;
-    float: left;
-    margin-right: 2%;
-  }
-
-  input[type='number'] { width: 100%; }
-
   .ranking {
-    width: 10%;
+    float: left;
+    width: 26%;
     p {
       color: $white;
       border-color: $white;
     }
   }
 
-  .inline-list {
-    width: 100%;
-    li { display: inline-block; }
+  .rank {
+    float: none;
+    width: auto;
+  }
+
+  img {
+    width: 31%;
+    margin-left: 5%;
+    margin-top: rem-calc(5)
+    }
+
+  h4,
+  h5,
+  .attrlist {
+    width: 60%;
   }
 
   .content {
-    width: 80%;
-    margin-left: 10%;
+    float: right;
+    width: 74%;
   }
 }
+//article {
+//  background-color: $pink;
+//  color: $white;
+//
+//
+//  h4, h5, .inline-list { float: left; }
+//  h4 { margin-bottom: 0; }
+//
+//  img {
+//    width: 25%;
+//    float: left;
+//    margin-right: 2%;
+//  }
+//
+//  input[type='number'] { width: 100%; }
+//
+//  .ranking {
+//    width: 10%;
+//    p {
+//      color: $white;
+//      border-color: $white;
+//    }
+//  }
+//
+//  .inline-list {
+//    width: 100%;
+//    li { display: inline-block; }
+//  }
+//
+//  .content {
+//    width: 80%;
+//    margin-left: 10%;
+//  }
+//}
