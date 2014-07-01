@@ -22,7 +22,7 @@ a, input {
     background-color: $pink;
     color: $white;
   }
-  &:focus { outline: $black 1px solid; }
+  &:focus { outline: $black rem-calc(1) solid; }
   &:visited { opacity: 0.8; }
 }
 
@@ -40,6 +40,6 @@ input[type='submit'] {
 
 hr {
   border: none;
-  height: 1px;
+  height: rem-calc(1);
   background-color: $grey;
 }
