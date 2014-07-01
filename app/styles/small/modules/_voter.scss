@@ -1,0 +1,10 @@
+.voter {
+  display:inline-block;
+  ul {
+    list-style:none;
+    padding:0;
+    li.score {
+      font-size: rem-calc(20);
+    }
+  }
+}
