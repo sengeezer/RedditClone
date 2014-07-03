@@ -22,4 +22,10 @@ article {
     width: 48%;
     float: right;
   }
+
+  .ranking {
+    p {
+      line-height: rem-calc(128)
+    }
+  }
 }

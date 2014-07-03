@@ -10,12 +10,10 @@ article {
       color: $pink;
       padding-bottom: rem-calc(10);
       margin-top: 0;
-      font-size: rem-calc(30);
+      font-size: rem-calc(100);
       margin-bottom: rem-calc(20);
       border-bottom: rem-calc(1) solid $pink;
-      height: rem-calc(50);
-      min-width: rem-calc(50);
-      line-height: rem-calc(50);
+      line-height: rem-calc(129);
       clear: both;
     }
   }
@@ -23,7 +21,7 @@ article {
   .rank {
     float: left;
     text-align: center;
-    width: 50%;
+    width: 48%;
     vertical-align: top;
   }
 

@@ -11,13 +11,9 @@ article {
     }
   }
 
-  .rank {
-    float: none;
-    width: auto;
-  }
 
   img {
-    width: 31%;
+    width: 30%;
     margin-left: 5%;
     margin-top: rem-calc(5)
     }
@@ -26,6 +22,7 @@ article {
   h5,
   .attrlist {
     width: 60%;
+    padding-left: 0;
   }
 
   .content {
