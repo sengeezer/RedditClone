@@ -3,7 +3,6 @@ article {
   color: $grey;
   padding: rem-calc(20);
   margin-bottom: rem-calc(20);
-
   .ranking {
     overflow: auto;
     p {
@@ -17,34 +16,28 @@ article {
       clear: both;
     }
   }
-
   .rank {
     float: left;
     text-align: center;
     width: 48%;
     vertical-align: top;
   }
-
   img {
     width: 100%;
     padding-bottom: rem-calc(20);
   }
-
   .left {
     float: none;
     width: 100%;
   }
-
-    input[type='number'] {
+  input[type='number'] {
     font-size: rem-calc(20);
     text-align: center;
     width: auto;
     margin: 0 auto rem-calc(20) auto;
   }
-
   .attrlist {
     margin-left: 0;
-
     li {
       margin-left: 0;
     }

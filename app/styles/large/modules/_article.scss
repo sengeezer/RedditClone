@@ -5,26 +5,23 @@ article {
   .ranking {
     float: left;
     width: 26%;
+
     p {
       color: $white;
       border-color: $white;
     }
   }
-
-
   img {
     width: 30%;
     margin-left: 5%;
-    margin-top: rem-calc(5)
-    }
-
+    margin-top: rem-calc(5);
+  }
   h4,
   h5,
   .attrlist {
     width: 60%;
     padding-left: 0;
   }
-
   .content {
     float: right;
     width: 74%;
