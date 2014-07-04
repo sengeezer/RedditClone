@@ -68,52 +68,21 @@
                 <section class="left comments clearfix">
                     <h5>all <span class="number">10</span> comments</h5>
                     <hr>
-                      <div class="row">
-                        <div class="small-2 medium-2 columns">
-                            <label for="right-label" class="right">sort by:</label>
-                        </div>
-                        <div class="small-6 medium-6 columns">
-                            <select id="right-label">
-                                <option value="best">best</option>
-                                <option value="top">top</option>
-                                <option value="new">new</option>
-                                <option value="hot">hot</option>
-                                <option value="controversial">controversial</option>
-                                <option value="old">old</option>
-                            </select>
-                        </div>
+                    <div id='comments'>
+                      <!--
+                      <div class="comment">
+                          <ul class="inline-list attrlist">
+                              <li><input type="number" id="stepper1" name="comment-stepper" min="1" max="10" value="5" /></li>
+                              <li><a href="#" id="comment-collapse-01">[+]</a></li>
+                              <li>CarlPerkins</li>
+                              <li>100 points</li>
+                              <li>6 hours ago</li>
+                          </ul>
+                          <p>What an insightful post!</p>
                       </div>
-                    <div class="row">
-                        <div class="small-9 medium-7 columns">
-                            <form name="comment-submit">
-                                <textarea placeholder="comment" name='cmnt' id='cmnt'></textarea>
-                                <div class="row">
-                                    <div class="small-1 medium-1 columns">
-                                        <a href="#" class="button tiny" id="submit-new-comment">Save</a>
-                                    </div>
-                                    <div class="small-8 medium-6 columns">
-                                        <ul class="inline-list attrlist">
-                                            <li><a href="#">formatting help</a></li>
-                                            <li><a href="#">reddiquette</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
+                      -->
                     </div>
-
-                    <div class="comment">
-                        <ul class="inline-list attrlist">
-                            <li><input type="number" id="stepper1" name="comment-stepper" min="1" max="10" value="5" /></li>
-                            <li><a href="#" id="comment-collapse-01">[+]</a></li>
-                            <li>CarlPerkins</li>
-                            <li>100 points</li>
-                            <li>6 hours ago</li>
-                        </ul>
-                        <p>What an insightful post!</p>
-                    </div>
-
+                    <!--
                     <blockquote>
                         <div class="comment">
                             <ul class="inline-list attrlist">
@@ -139,9 +108,46 @@
 
                         </blockquote>
                     </blockquote>
-
                     <p><a href="#">Load more comments</a></p>
+                    -->
+                    <!--
+                    <div class="row">
+                      <div class="small-2 medium-2 columns">
+                          <label for="right-label" class="right">sort by:</label>
+                      </div>
+                      <div class="small-6 medium-6 columns">
+                          <select id="right-label">
+                              <option value="best">best</option>
+                              <option value="top">top</option>
+                              <option value="new">new</option>
+                              <option value="hot">hot</option>
+                              <option value="controversial">controversial</option>
+                              <option value="old">old</option>
+                          </select>
+                      </div>
+                    </div>
+                    -->
+                    <div class="row">
+                        <div class="small-9 medium-7 columns">
+                            <form name="comment-submit">
+                                <textarea placeholder="comment" name='cmnt' id='cmnt'></textarea>
+                                <div class="row">
+                                    <div class="small-1 medium-1 columns">
+                                        <a href="#" class="button tiny" id="submit-new-comment">Save</a>
+                                    </div>
+                                    <!--
+                                    <div class="small-8 medium-6 columns">
+                                        <ul class="inline-list attrlist">
+                                            <li><a href="#">formatting help</a></li>
+                                            <li><a href="#">reddiquette</a></li>
+                                        </ul>
+                                    </div>
+                                    -->
+                                </div>
+                            </form>
 
+                        </div>
+                    </div>
                 </section>
             </article>
         </div>

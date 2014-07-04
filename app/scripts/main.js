@@ -169,14 +169,27 @@ jQuery(document).ready(function($) {
         reorderArticles(articleList);
     }
 
+    function renderComments(comments) {
+      var order = [];
+      $(comments).each(function (index, element) {
+        order.push(
+        '<div class="comment"><h5>by user1990</h5><hr><div class="content">' + element + '</div></div>'
+        );
+      });
+
+      $('#comments').html(order.join(''));
+    }
     function submitComment() {
       var cmntVal = $('#cmnt').val();
-      var articleId = $('#cmnt').parents('article').attr('id').substring(8);
-      var aricleIndex = articleId - 1;
-      var article = articleList[aricleIndex];
+      var articleId = getUrlVars().id
+      var article = articleList[articleId];
 
-      article.comments.push(cmntVal);
-      console.log(article);
+      if (article !== undefined) {
+        article.comments.push(cmntVal);
+        renderComments(article.comments);
+        $('#cmnt').val('');
+      };
+      return false;
     };
 
     $('#submit-new-article').on('click', submitArticle);
