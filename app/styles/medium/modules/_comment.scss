@@ -1,0 +1,11 @@
+.comment {
+  padding: rem-calc(20);
+  background-color: $sea;
+
+  h4,
+  h5,
+  .attrlist {
+    width: 48%;
+    float: none;
+  }
+}

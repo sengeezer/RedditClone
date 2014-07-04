@@ -102,7 +102,7 @@ jQuery(document).ready(function($) {
                 '\x3Ch4\x3E' + element.text + ' ' + '\x3Ca href=\"' + element.link + '\" target=\"_blank\" class=\"srclink\"\x3E' + '(' + element.link.slice(7) + ')' + '\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n'+
                 '\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n'+
                 '\x3Cul class=\"inline-list attrlist\"\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"article.html?id=' + index + '\"\x3E100 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"article.html?id=' + index + '\"\x3Eall comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\"\x3Eshare\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\"\x3Esave\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3Cli\x3E\x3Ca href=\"#\"\x3Ehide\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
@@ -173,20 +173,32 @@ jQuery(document).ready(function($) {
       var order = [];
       $(comments).each(function (index, element) {
         order.push(
-        '<div class="comment"><h5>by user1990</h5><hr><div class="content">' + element + '</div></div>'
+        '<div class="comment"><h5>by user1990</h5><div class="content">' + element + '</div></div>'
         );
       });
 
       $('#comments').html(order.join(''));
     }
+
+    function updateCommentNumber(number) {
+      if (number == 1) {
+        var text = number + ' comment'
+      } else {
+        var text = number + ' comments'
+      };
+      $('.cmnt-nr').html(text);
+    };
+
     function submitComment() {
       var cmntVal = $('#cmnt').val();
-      var articleId = getUrlVars().id
+      var articleId = getUrlVars().id.replace('#', '');
+      console.log(articleId);
       var article = articleList[articleId];
 
-      if (article !== undefined) {
+      if (article !== undefined && cmntVal.length > 0) {
         article.comments.push(cmntVal);
         renderComments(article.comments);
+        updateCommentNumber(article.comments.length);
         $('#cmnt').val('');
       };
       return false;
