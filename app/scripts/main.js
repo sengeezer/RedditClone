@@ -1,5 +1,6 @@
 /*jshint strict: true */
 $.noConflict();
+
 jQuery(document).ready(function($) {
     'use strict';
 
@@ -168,7 +169,18 @@ jQuery(document).ready(function($) {
         reorderArticles(articleList);
     }
 
+    function submitComment() {
+      var cmntVal = $('#cmnt').val();
+      var articleId = $('#cmnt').parents('article').attr('id').substring(8);
+      var aricleIndex = articleId - 1;
+      var article = articleList[aricleIndex];
+
+      article.comments.push(cmntVal);
+      console.log(article);
+    };
+
     $('#submit-new-article').on('click', submitArticle);
+    $('#submit-new-comment').on('click', submitComment);
 
     activateNumberListener();
 });
