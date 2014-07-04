@@ -1,8 +1,10 @@
-form { background-color: $sea; }
-
-a, input {
-  &:hover {
-    background-color: $lemon;
-    color: $white;
+form {
+  background-color: $sea;
+  a,
+  input {
+    &:hover {
+      background-color: $lemon;
+      color: $white;
+    }
   }
 }
