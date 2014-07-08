@@ -18,13 +18,17 @@
 @import "small/modules/hint";
 @import "small/modules/panel";
 @import "small/modules/voter";
+@import "small/modules/comment";
 @import "small/modules/comments";
+@import "small/modules/comment_form";
 
 // Medium viewport
 
 @media #{$medium}{
   @import "medium/base";
   @import "medium/modules/article";
+  @import "medium/modules/comment";
+  @import "medium/modules/comments";
 }
 
 // Large viewport
@@ -35,5 +39,6 @@
   @import "large/states";
   @import "large/modules/article";
   @import "large/modules/voter";
+  @import "large/modules/comment";
 }
 
