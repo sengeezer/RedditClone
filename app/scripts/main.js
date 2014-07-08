@@ -120,7 +120,6 @@ jQuery(document).ready(function($) {
     // From http://jsfiddle.net/dFNva/1/
     var sortBy = function(field, reverse, primer){
         var key = function (x) {return primer ? primer(x[field]) : x[field];};
-
         return function (a,b) {
             var A = key(a), B = key(b);
             return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];
@@ -185,9 +184,9 @@ jQuery(document).ready(function($) {
         var text = number + ' comment'
       } else {
         var text = number + ' comments'
-      };
+      }
       $('.cmnt-nr').html(text);
-    };
+    }
 
     function submitComment() {
       var cmntVal = $('#cmnt').val();
@@ -199,9 +198,9 @@ jQuery(document).ready(function($) {
         renderComments(article.comments);
         updateCommentNumber(article.comments.length);
         $('#cmnt').val('');
-      };
+      }
       return false;
-    };
+    }
 
     $('#submit-new-article').on('click', submitArticle);
     $('#submit-new-comment').on('click', submitComment);
