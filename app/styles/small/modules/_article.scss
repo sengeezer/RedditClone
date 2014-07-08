@@ -4,24 +4,42 @@ article {
   padding: rem-calc(20);
   margin-bottom: rem-calc(20);
   .ranking {
-    text-align: center;
+    overflow: auto;
     p {
       color: $pink;
       padding-bottom: rem-calc(10);
       margin-top: 0;
-      font-size: rem-calc(30);
+      font-size: rem-calc(100);
       margin-bottom: rem-calc(20);
       border-bottom: rem-calc(1) solid $pink;
-      height: rem-calc(50);
-      min-width: rem-calc(50);
-      line-height: rem-calc(50);
+      line-height: rem-calc(129);
+      clear: both;
     }
   }
-  .left { float: none !important; }
+  .rank {
+    float: left;
+    text-align: center;
+    width: 48%;
+    vertical-align: top;
+  }
+  img {
+    width: 100%;
+    padding-bottom: rem-calc(20);
+  }
+  .left {
+    float: none;
+    width: 100%;
+  }
   input[type='number'] {
     font-size: rem-calc(20);
     text-align: center;
     width: auto;
     margin: 0 auto rem-calc(20) auto;
+  }
+  .attrlist {
+    margin-left: 0;
+    li {
+      margin-left: 0;
+    }
   }
 }

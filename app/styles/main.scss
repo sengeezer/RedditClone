@@ -1,100 +1,9 @@
 // Override Foundation settings
-@import url(http://fonts.googleapis.com/css?family=Indie+Flower|Poiret+One|Paytone+One);
 @import "custom-settings";
 @import "custom-mixins";
 // bower:scss
 @import "../bower_components/foundation/scss/foundation.scss";
 // endbower
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-footer {
-  background-color:#fafafa;
-  padding-top: 5px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-#articles {
-  article {
-    margin: 15px 0;
-    h4 {
-      display:inline;
-      span.srclink {
-        font-size: 0.8em;
-        color: #ccc;
-        display:inline;
-      }
-    }
-    h4, h5 { font-size:0.9em; }
-
-    ul.attrlist {
-      font-size:14px;
-      margin-left: 20px;
-    }
-
-    section.content {
-      width: 80%;
-      margin-left:25px;
-      img {
-        float:left;
-        margin-right:20px;
-      }
-
-    }
-    section.ranking {
-      p, input {
-        display:inline-block;
-        width:50px;
-      }
-      p { padding:10px 10px 5px 10px; }
-      input { padding-top:10px; }
-    }
-    section.comments {
-      width:100%;
-      padding:10px 25px;
-      .comment {
-        position: relative;
-        p {
-          position: absolute;
-          top: 25px;
-          left:120px;
-          font-size:0.9em;
-        }
-        input { width: 4em; }
-      }
-    }
-  }
-}
-
-form .hint {
-  font-size:11px;
-  padding:0 0 15px 0;
-}
-
-h4.rc {
-  font-size:16px;
-  font-weight:bold;
-  line-height: 18px;
-}
-
-.voter {
-  display:inline-block;
-  ul {
-    list-style:none;
-    padding:0;
-    li.score {
-      font-size: rem-calc(20);
-    }
-  }
-}
-
-/* Responsive styles */
 
 // Project base styles
 @import "small/base";
@@ -108,6 +17,8 @@ h4.rc {
 @import "small/modules/inline-list";
 @import "small/modules/hint";
 @import "small/modules/panel";
+@import "small/modules/voter";
+@import "small/modules/comments";
 
 // Medium viewport
 
@@ -123,5 +34,6 @@ h4.rc {
   @import "large/layout";
   @import "large/states";
   @import "large/modules/article";
+  @import "large/modules/voter";
 }
 

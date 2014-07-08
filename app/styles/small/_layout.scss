@@ -11,4 +11,11 @@ header {
   }
 }
 
+
+footer {
+  padding-top: rem-calc(5);
+  color: $grey;
+  border-top: rem-calc(1) solid $grey-dark;
+}
+
 #logo { background: none; }
