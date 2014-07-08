@@ -1,5 +1,6 @@
 /*jshint strict: true */
 $.noConflict();
+
 jQuery(document).ready(function($) {
     'use strict';
 
@@ -68,11 +69,9 @@ jQuery(document).ready(function($) {
 
             if($(this).hasClass('up')){
                 newVal = oldVal + 1;
-                // console.log('up ' + cRid + ' newVal is ' + newVal);
             }
             else if ($(this).hasClass('down')){
                 newVal = oldVal - 1;
-                // console.log('down ' + cRid + ' newVal is ' + newVal);
             }
 
             // TODO: .score should display actual number of votes
@@ -100,13 +99,14 @@ jQuery(document).ready(function($) {
                 '\x3Csection class=\"left content\"\x3E\n'+
                 '\x3Cimg src=\"' + element.image + '\"\x3E\n'+
                 '\x3Ch4\x3E' + element.text + ' ' + '\x3Ca href=\"' + element.link + '\" target=\"_blank\" class=\"srclink\"\x3E' + '(' + element.link.slice(7) + ')' + '\x3C\x2Fa\x3E\x3C\x2Fh4\x3E\n'+
-                '\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n'+
+                //'\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n'+
+                '\x3Ch5 class=\"subheader\"\x3E by CarlPerkins\x3C\x2Fh5\x3E\n'+
                 '\x3Cul class=\"inline-list attrlist\"\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"article.html?id=' + index + '\"\x3E100 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"#\"\x3Eshare\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"#\"\x3Esave\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"#\"\x3Ehide\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"#\"\x3Ereport\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"article.html?id=' + index + '\"\x3Eall comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                //'\x3Cli\x3E\x3Ca href=\"#\"\x3Eshare\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                //'\x3Cli\x3E\x3Ca href=\"#\"\x3Esave\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                //'\x3Cli\x3E\x3Ca href=\"#\"\x3Ehide\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                //'\x3Cli\x3E\x3Ca href=\"#\"\x3Ereport\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3C\x2Ful\x3E\n'+
                 '\x3C\x2Fsection\x3E\n' +
                 '\x3C\x2Farticle\x3E'
@@ -169,7 +169,42 @@ jQuery(document).ready(function($) {
         reorderArticles(articleList);
     }
 
+    function renderComments(comments) {
+      var order = [];
+      $(comments).each(function (index, element) {
+        order.push(
+        '<div class="comment"><h5>by user1990</h5><div class="content">' + element + '</div></div>'
+        );
+      });
+
+      $('#comments').html(order.join(''));
+    }
+
+    function updateCommentNumber(number) {
+      if (number == 1) {
+        var text = number + ' comment'
+      } else {
+        var text = number + ' comments'
+      };
+      $('.cmnt-nr').html(text);
+    };
+
+    function submitComment() {
+      var cmntVal = $('#cmnt').val();
+      var articleId = getUrlVars().id.replace('#', '');
+      var article = articleList[articleId];
+
+      if (article !== undefined && cmntVal.length > 0) {
+        article.comments.push(cmntVal);
+        renderComments(article.comments);
+        updateCommentNumber(article.comments.length);
+        $('#cmnt').val('');
+      };
+      return false;
+    };
+
     $('#submit-new-article').on('click', submitArticle);
+    $('#submit-new-comment').on('click', submitComment);
 
     activateNumberListener();
 });
