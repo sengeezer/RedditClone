@@ -68,11 +68,11 @@ jQuery(document).ready(function($) {
 
             if($(this).hasClass('up')){
                 newVal = oldVal + 1;
-                console.log('up ' + cRid + ' newVal is ' + newVal);
+                // console.log('up ' + cRid + ' newVal is ' + newVal);
             }
             else if ($(this).hasClass('down')){
                 newVal = oldVal - 1;
-                console.log('down ' + cRid + ' newVal is ' + newVal);
+                // console.log('down ' + cRid + ' newVal is ' + newVal);
             }
 
             // TODO: .score should display actual number of votes
