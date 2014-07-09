@@ -10,6 +10,7 @@ jQuery(document).ready(function($) {
     var captionVal = '';
     var hrefVal = '';
     var rankVal = '';
+    var scoreVal = 0;
 
     /*
      Creating article list,
@@ -27,10 +28,10 @@ jQuery(document).ready(function($) {
     // TODO: Random score for first item, rest in descending order. Write ranking algorithm
     var defaultRank = defaultScore;
 
-    function FrontArticle(rank, text, link, image) {
+    function FrontArticle(rank, score, text, link, image) {
         this.id = noArticles++;
         this.rank = rank || defaultRank;
-        this.score = getRandomInt(1,25);
+        this.score = score;
         this.text = text;
         this.image = image || 'http://placehold.it/75x75&text=icon';
         this.link = link;
@@ -38,9 +39,9 @@ jQuery(document).ready(function($) {
     }
 
     // populate articleList with existing content
-    var article01 = new FrontArticle(1, 'monocultures rock', 'http://nasa.gov');
-    var article02 = new FrontArticle(2, 'cultural happenings', 'http://boston.com');
-    var article03 = new FrontArticle(3, 'Gotthard', 'http://gotthard.com');
+    var article01 = new FrontArticle(1, getRandomInt(1,25), 'monocultures rock', 'http://nasa.gov');
+    var article02 = new FrontArticle(2, getRandomInt(1,25), 'cultural happenings', 'http://boston.com');
+    var article03 = new FrontArticle(3, getRandomInt(1,25), 'Gotthard', 'http://gotthard.com');
 
     articleList.push(article01);
     articleList.push(article02);
@@ -79,6 +80,11 @@ jQuery(document).ready(function($) {
             articleList[cRid - 1].score = newVal;
 
             reorderArticles(articleList);
+        });
+        $('.cmnt-nr').on('click', function(e){
+            e.preventDefault();
+
+            $('section.comments').toggle();
         });
     }
 
@@ -143,9 +149,10 @@ jQuery(document).ready(function($) {
         imgVal = $('#img').val();
         captionVal = $('#caption').val();
         hrefVal = $('#href').val();
-        rankVal = 4; // should be last rank in articles + 1
+        rankVal = articleList[articleList.length - 1].rank + 1;
+        scoreVal = 0;
 
-        articleList.push(new FrontArticle(rankVal, captionVal, hrefVal, imgVal));
+        articleList.push(new FrontArticle(rankVal, scoreVal, captionVal, hrefVal, imgVal));
         renderArticles(); // renderWhen:2
         return false;
     }
@@ -180,12 +187,13 @@ jQuery(document).ready(function($) {
     }
 
     function updateCommentNumber(number) {
-      if (number == 1) {
-        var text = number + ' comment'
-      } else {
-        var text = number + ' comments'
-      }
-      $('.cmnt-nr').html(text);
+        var text = '';
+        if (number === 1) {
+            text = number + ' comment';
+        } else {
+            text = number + ' comments';
+        }
+        $('.cmnt-nr').html(text);
     }
 
     function submitComment() {
@@ -206,4 +214,5 @@ jQuery(document).ready(function($) {
     $('#submit-new-comment').on('click', submitComment);
 
     activateNumberListener();
+
 });
