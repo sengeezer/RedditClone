@@ -132,7 +132,7 @@ jQuery(document).ready(function($) {
                 '\x3Ctextarea placeholder=\"comment\" name=\"cmnt\" id=\"cmnt\"\x3E\x3C\x2Ftextarea\x3E\n' +
                 '\x3Cdiv class=\"row\"\x3E\n' +
                 '\x3Cdiv class=\"small-1 medium-1 columns\"\x3E\n' +
-                '\x3Ca href=\"#\" class=\"button tiny\" id=\"submit-new-comment\"\x3ESave\x3C\x2Fa\x3E\n' +
+                '\x3Cinput type=\"submit\" value=\"Save\" id=\"submit-new-comment\"\x3E\n' +
                 '\x3C\x2Fdiv\x3E\n' +
                 '\x3C\x2Fdiv\x3E\n' +
                 '\x3C\x2Fform\x3E\n' +
