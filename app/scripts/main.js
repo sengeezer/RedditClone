@@ -182,25 +182,7 @@ jQuery(document).ready(function($) {
         return false;
     }
 
-    // Allows efficient usage of multiple query strings per request
-    // credit: http://jquery-howto.blogspot.com/2009/09/get-url-parameters-values-with-jquery.html
-    function getUrlVars(){
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
-    }
-
     // renderWhen:1
-    /*
-    if (getUrlVars().id === undefined){
-        reorderArticles(articleList);
-    }
-    */
 
     reorderArticles(articleList);
 
@@ -226,17 +208,20 @@ jQuery(document).ready(function($) {
     }
 
     function submitComment() {
-      var cmntVal = $('#cmnt').val();
-      var articleId = getUrlVars().id.replace('#', '');
-      var article = articleList[articleId];
+        var currId = $(this).closest('article').attr('id');
+        var articleId = currId.charAt(currId.length - 1);
 
-      if (article !== undefined && cmntVal.length > 0) {
-        article.comments.push(cmntVal);
-        renderComments(article.comments);
-        updateCommentNumber(article.comments.length);
-        $('#cmnt').val('');
-      }
-      return false;
+        var cmntVal = $('#cmnt').val();
+
+        var article = articleList[articleId];
+
+        if (article !== undefined && cmntVal.length > 0) {
+            article.comments.push(cmntVal);
+            renderComments(article.comments);
+            updateCommentNumber(article.comments.length);
+            $('#cmnt').val('');
+        }
+        return false;
     }
 
     $('#submit-new-article').on('click', submitArticle);
