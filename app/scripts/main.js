@@ -81,10 +81,19 @@ jQuery(document).ready(function($) {
 
             reorderArticles(articleList);
         });
-        $('.cmnt-nr').on('click', function(e){
-            e.preventDefault();
 
-            $('section.comments').toggle();
+    }
+
+    function activateCommentsListener(){
+        $('section.content').on('click', 'a.cmnt-nr', function(e){
+            e.preventDefault();
+            var currId = $(this).closest('article').attr('id');
+            var cRid = currId.charAt(currId.length - 1);
+            var toBeT = '.c' + cRid;
+
+            // console.log(toBeT);
+            $(toBeT).toggle();
+
         });
     }
 
@@ -108,12 +117,29 @@ jQuery(document).ready(function($) {
                 //'\x3Ch5 class=\"subheader\"\x3Esubmitted \x3Cdate\x3E6 hours\x3C\x2Fdate\x3E ago by CarlPerkins\x3C\x2Fh5\x3E\n'+
                 '\x3Ch5 class=\"subheader\"\x3E by CarlPerkins\x3C\x2Fh5\x3E\n'+
                 '\x3Cul class=\"inline-list attrlist\"\x3E\n'+
-                '\x3Cli\x3E\x3Ca href=\"article.html?id=' + index + '\"\x3Eall comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
+                '\x3Cli\x3E\x3Ca href=\"#\" class=\"cmnt-nr\"\x3E0 comments\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 //'\x3Cli\x3E\x3Ca href=\"#\"\x3Eshare\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 //'\x3Cli\x3E\x3Ca href=\"#\"\x3Esave\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 //'\x3Cli\x3E\x3Ca href=\"#\"\x3Ehide\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 //'\x3Cli\x3E\x3Ca href=\"#\"\x3Ereport\x3C\x2Fa\x3E\x3C\x2Fli\x3E\n'+
                 '\x3C\x2Ful\x3E\n'+
+                '\x3C\x2Fsection\x3E\n' +
+                '\x3Csection class=\"left comments clearfix c' + element.id + '\"\x3E\n' +
+                '\x3Ch5\x3E\x3Cspan class=\"cmnt-nr\"\x3E0 comments\x3C\x2Fspan\x3E\x3C\x2Fh5\x3E\n' +
+                '\x3Chr\x3E\n' +
+                '\x3Cdiv id=\"comments\"\x3E\x3C\x2Fdiv\x3E\n' +
+                '\x3Cdiv class=\"row\"\x3E\n' +
+                '\x3Cdiv class=\"small-12 medium-7 columns\"\x3E\n' +
+                '\x3Cform class=\"comment-form\" name=\"comment-submit\"\x3E\n' +
+                '\x3Ctextarea placeholder=\"comment\" name=\"cmnt\" id=\"cmnt\"\x3E\x3C\x2Ftextarea\x3E\n' +
+                '\x3Cdiv class=\"row\"\x3E\n' +
+                '\x3Cdiv class=\"small-1 medium-1 columns\"\x3E\n' +
+                '\x3Ca href=\"#\" class=\"button tiny\" id=\"submit-new-comment\"\x3ESave\x3C\x2Fa\x3E\n' +
+                '\x3C\x2Fdiv\x3E\n' +
+                '\x3C\x2Fdiv\x3E\n' +
+                '\x3C\x2Fform\x3E\n' +
+                '\x3C\x2Fdiv\x3E\n' +
+                '\x3C\x2Fdiv\x3E\n' +
                 '\x3C\x2Fsection\x3E\n' +
                 '\x3C\x2Farticle\x3E'
             );
@@ -121,6 +147,7 @@ jQuery(document).ready(function($) {
 
         $('#articles').html(order.join(''));
         activateNumberListener();
+        activateCommentsListener();
     }
 
     // From http://jsfiddle.net/dFNva/1/
@@ -171,9 +198,13 @@ jQuery(document).ready(function($) {
     }
 
     // renderWhen:1
+    /*
     if (getUrlVars().id === undefined){
         reorderArticles(articleList);
     }
+    */
+
+    reorderArticles(articleList);
 
     function renderComments(comments) {
       var order = [];
@@ -214,5 +245,4 @@ jQuery(document).ready(function($) {
     $('#submit-new-comment').on('click', submitComment);
 
     activateNumberListener();
-
 });

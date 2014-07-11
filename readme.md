@@ -1,5 +1,5 @@
-#Reddit clone
-##An exercise
+#Herdit
+##An attempt at a Reddit clone
 
 ##Prerequisites
 
