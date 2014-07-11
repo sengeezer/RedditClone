@@ -75,8 +75,6 @@ jQuery(document).ready(function($) {
                 newVal = oldVal - 1;
             }
 
-            // TODO: .score should display actual number of votes
-
             articleList[cRid - 1].score = newVal;
 
             reorderArticles(articleList);
