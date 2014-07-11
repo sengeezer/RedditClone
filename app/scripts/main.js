@@ -197,14 +197,17 @@ jQuery(document).ready(function($) {
       $('#comments').html(order.join(''));
     }
 
-    function updateCommentNumber(number) {
+    function updateCommentNumber(id, number) {
         var text = '';
         if (number === 1) {
             text = number + ' comment';
         } else {
             text = number + ' comments';
         }
-        $('.cmnt-nr').html(text);
+
+        // Ensure that correct article's number is updated
+        var toBeU = '#article-' + id + ' ' + '.cmnt-nr';
+        $(toBeU).html(text);
     }
 
     function submitComment() {
@@ -218,7 +221,7 @@ jQuery(document).ready(function($) {
         if (article !== undefined && cmntVal.length > 0) {
             article.comments.push(cmntVal);
             renderComments(article.comments);
-            updateCommentNumber(article.comments.length);
+            updateCommentNumber(article, article.comments.length);
             $('#cmnt').val('');
         }
         return false;
