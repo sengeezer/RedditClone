@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
     var articleList = [];
     var defaultScore = getRandomInt(1,25);
 
-    // TODO: Random score for first item, rest in descending order. Write ranking algorithm
+    // TODO: Write ranking algorithm
     var defaultRank = defaultScore;
 
     function FrontArticle(rank, score, text, link, image) {
@@ -129,10 +129,10 @@ jQuery(document).ready(function($) {
                 '\x3Cdiv class=\"row\"\x3E\n' +
                 '\x3Cdiv class=\"small-12 medium-7 columns\"\x3E\n' +
                 '\x3Cform class=\"comment-form\" name=\"comment-submit\"\x3E\n' +
-                '\x3Ctextarea placeholder=\"comment\" name=\"cmnt\" id=\"cmnt\"\x3E\x3C\x2Ftextarea\x3E\n' +
+                '\x3Ctextarea placeholder=\"comment\" name=\"cmnt\" class=\"cmnt\"\x3E\x3C\x2Ftextarea\x3E\n' +
                 '\x3Cdiv class=\"row\"\x3E\n' +
                 '\x3Cdiv class=\"small-1 medium-1 columns\"\x3E\n' +
-                '\x3Cinput type=\"submit\" value=\"Save\" id=\"submit-new-comment\"\x3E\n' +
+                '\x3Cinput type=\"submit\" value=\"Save\" class=\"submit-new-comment\"\x3E\n' +
                 '\x3C\x2Fdiv\x3E\n' +
                 '\x3C\x2Fdiv\x3E\n' +
                 '\x3C\x2Fform\x3E\n' +
@@ -212,23 +212,38 @@ jQuery(document).ready(function($) {
 
     function submitComment() {
         var currId = $(this).closest('article').attr('id');
+        console.log('215: ' + currId);
         var articleId = currId.charAt(currId.length - 1);
 
-        var cmntVal = $('#cmnt').val();
-
         var article = articleList[articleId];
+        // use rank, not ID
+        var currCmtVal = '#' + currId + ' ' + '.cmnt';
 
+        var cmntVal = $(currCmtVal).val();
+
+
+        var currForm = $(this).closest('form');
+        $(currForm).submit(function(e){
+            e.preventDefault();
+
+        });
+        console.log('228: ' + cmntVal);
         if (article !== undefined && cmntVal.length > 0) {
+            console.log('232: article.id: ' + article.id + ' cmntVal.length: ' + cmntVal.length);
+
+            console.log('234: article.comments: ' + article.comments);
+
             article.comments.push(cmntVal);
+
             renderComments(article.comments);
-            updateCommentNumber(article, article.comments.length);
-            $('#cmnt').val('');
+            updateCommentNumber(article.id, article.comments.length);
+            $(currCmtVal).val('');
         }
         return false;
     }
 
     $('#submit-new-article').on('click', submitArticle);
-    $('#submit-new-comment').on('click', submitComment);
+    $('.submit-new-comment').on('click', submitComment);
 
     activateNumberListener();
 });
