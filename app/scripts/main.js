@@ -59,8 +59,6 @@ jQuery(document).ready(function($) {
         $('.voter').on('click', 'a', function(e){
             e.preventDefault();
 
-            // var currScore = $(this).closest('article').find('.score').text();
-
             var currId = $(this).closest('article').attr('id');
             var cRid = currId.charAt(currId.length - 1);
 
@@ -179,6 +177,7 @@ jQuery(document).ready(function($) {
 
         articleList.push(new FrontArticle(rankVal, scoreVal, captionVal, hrefVal, imgVal));
         renderArticles(); // renderWhen:2
+
         return false;
     }
 
@@ -214,7 +213,7 @@ jQuery(document).ready(function($) {
     function submitComment() {
 
         var currId = $(this).closest('article').find('.rank').text();
-        console.log('221: ' + currId);
+
         var article = '';
         var currCmtVal = '';
 
@@ -230,7 +229,7 @@ jQuery(document).ready(function($) {
             }
             */
         }
-        // console.log('234: ' + currCmtVal);
+
         var cmntVal = $(currCmtVal).val();
 
         var currForm = $(this).closest('form');
@@ -240,11 +239,8 @@ jQuery(document).ready(function($) {
         });
         console.log('242: ' + cmntVal);
         if (article !== undefined && cmntVal.length > 0) {
-            // console.log('244: article.id: ' + article.id + ' cmntVal.length: ' + cmntVal.length);
 
             article.comments.push(cmntVal);
-
-            // console.log('246: article.comments: ' + article.comments);
 
             renderComments(article.id, article.comments);
             updateCommentNumber(article.id, article.comments.length);
