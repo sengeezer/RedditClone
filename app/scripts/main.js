@@ -87,7 +87,6 @@ jQuery(document).ready(function($) {
             var cRid = currId.charAt(currId.length - 1);
             var toBeT = '.c' + cRid;
 
-            // console.log(toBeT);
             $(toBeT).toggle();
 
         });
