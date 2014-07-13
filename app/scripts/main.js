@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
     var articleList = [];
     var defaultScore = getRandomInt(1,25);
 
-    // TODO: Write ranking algorithm
+    // TODO: (M2+) Write ranking algorithm
     var defaultRank = defaultScore;
 
     function FrontArticle(rank, score, text, link, image) {
@@ -59,8 +59,7 @@ jQuery(document).ready(function($) {
         $('.voter').on('click', 'a', function(e){
             e.preventDefault();
 
-            var currScore = $(this).closest('article').find('.score').text();
-            console.log(currScore);
+            // var currScore = $(this).closest('article').find('.score').text();
 
             var currId = $(this).closest('article').attr('id');
             var cRid = currId.charAt(currId.length - 1);
@@ -78,6 +77,7 @@ jQuery(document).ready(function($) {
             articleList[cRid - 1].score = newVal;
 
             reorderArticles(articleList);
+
         });
 
     }
@@ -186,7 +186,7 @@ jQuery(document).ready(function($) {
 
     reorderArticles(articleList);
 
-    function renderComments(comments) {
+    function renderComments(id, comments) {
       var order = [];
       $(comments).each(function (index, element) {
         order.push(
@@ -194,7 +194,9 @@ jQuery(document).ready(function($) {
         );
       });
 
-      $('#comments').html(order.join(''));
+        var targetArticle = '#article-' + id + ' ' + '#comments';
+
+      $(targetArticle).html(order.join(''));
     }
 
     function updateCommentNumber(id, number) {
@@ -205,37 +207,46 @@ jQuery(document).ready(function($) {
             text = number + ' comments';
         }
 
-        // Ensure that correct article's number is updated
         var toBeU = '#article-' + id + ' ' + '.cmnt-nr';
         $(toBeU).html(text);
     }
 
     function submitComment() {
-        var currId = $(this).closest('article').attr('id');
-        console.log('215: ' + currId);
-        var articleId = currId.charAt(currId.length - 1);
 
-        var article = articleList[articleId];
-        // use rank, not ID
-        var currCmtVal = '#' + currId + ' ' + '.cmnt';
+        var currId = $(this).closest('article').find('.rank').text();
+        console.log('221: ' + currId);
+        var article = '';
+        var currCmtVal = '';
 
+        for (var i = 0; i < articleList.length; i++){
+            if(articleList[i].rank === parseInt(currId)){
+                article = articleList[i];
+
+                currCmtVal = '.c' + articleList[i].id + ' ' + '.cmnt';
+            }
+            /*
+            else {
+                console.log('231: error: ' + articleList[i].rank);
+            }
+            */
+        }
+        // console.log('234: ' + currCmtVal);
         var cmntVal = $(currCmtVal).val();
-
 
         var currForm = $(this).closest('form');
         $(currForm).submit(function(e){
             e.preventDefault();
 
         });
-        console.log('228: ' + cmntVal);
+        console.log('242: ' + cmntVal);
         if (article !== undefined && cmntVal.length > 0) {
-            console.log('232: article.id: ' + article.id + ' cmntVal.length: ' + cmntVal.length);
-
-            console.log('234: article.comments: ' + article.comments);
+            // console.log('244: article.id: ' + article.id + ' cmntVal.length: ' + cmntVal.length);
 
             article.comments.push(cmntVal);
 
-            renderComments(article.comments);
+            // console.log('246: article.comments: ' + article.comments);
+
+            renderComments(article.id, article.comments);
             updateCommentNumber(article.id, article.comments.length);
             $(currCmtVal).val('');
         }
@@ -246,4 +257,5 @@ jQuery(document).ready(function($) {
     $('.submit-new-comment').on('click', submitComment);
 
     activateNumberListener();
+
 });
