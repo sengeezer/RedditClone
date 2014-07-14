@@ -1,4 +1,7 @@
 /*jshint strict: true */
+
+var db = require('../modules/database');
+
 $.noConflict();
 
 jQuery(document).ready(function($) {
