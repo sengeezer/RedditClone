@@ -41,20 +41,3 @@
   @import "large/modules/voter";
   @import "large/modules/comment";
 }
-
-article section.comments {
-  //display:none;
-
-}
-
-.shown {
-  display:block;
-}
-
-.piven {
-  display:none;
-}
-
-@for $i from 1 through 5 {
-  .c#{$i} { display:none; }
-}

@@ -50,3 +50,7 @@ hr {
 .button.tiny {
   font-size: rem-calc(16);
 }
+
+@for $i from 1 through 5 {
+  .c#{$i} { display:none; }
+}
