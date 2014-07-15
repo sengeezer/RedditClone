@@ -1,13 +1,12 @@
 /*jshint strict: true */
 
 var db = require('../modules/database');
+var fa = require('../modules/database/frontArticle');
 
 $.noConflict();
 
 jQuery(document).ready(function($) {
     'use strict';
-
-    var noArticles = 1;
 
     var imgVal = '';
     var captionVal = '';
@@ -15,40 +14,20 @@ jQuery(document).ready(function($) {
     var rankVal = '';
     var scoreVal = 0;
 
+    var articleList = [];
+
     /*
      Creating article list,
      preparing for rendering
      */
 
-    // From MDN
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    var articleList = [];
-    var defaultScore = getRandomInt(1,25);
-
-    // TODO: (M2+) Write ranking algorithm
-    var defaultRank = defaultScore;
-
-    function FrontArticle(rank, score, text, link, image) {
-        this.id = noArticles++;
-        this.rank = rank || defaultRank;
-        this.score = score;
-        this.text = text;
-        this.image = image || 'http://placehold.it/75x75&text=icon';
-        this.link = link;
-        this.comments = [];
-    }
-
-    // populate articleList with existing content
-    var article01 = new FrontArticle(1, getRandomInt(1,25), 'monocultures rock', 'http://nasa.gov');
-    var article02 = new FrontArticle(2, getRandomInt(1,25), 'cultural happenings', 'http://boston.com');
-    var article03 = new FrontArticle(3, getRandomInt(1,25), 'Gotthard', 'http://gotthard.com');
-
-    articleList.push(article01);
-    articleList.push(article02);
-    articleList.push(article03);
+    // retrieve all articles from the database and put them in articleList
+    db.find({}, function (err, docs) {
+        if(err){
+            return console.error(err);
+        }
+        articleList = docs;
+    });
 
     /* render when:
      1. Page first loads
@@ -177,7 +156,14 @@ jQuery(document).ready(function($) {
         rankVal = articleList[articleList.length - 1].rank + 1;
         scoreVal = 0;
 
-        articleList.push(new FrontArticle(rankVal, scoreVal, captionVal, hrefVal, imgVal));
+        // articleList.push(new FrontArticle(rankVal, scoreVal, captionVal, hrefVal, imgVal));
+
+        db.insert(new fa(rankVal, scoreVal, captionVal, hrefVal, imgVal), function(err){
+            if (err) {
+                return console.error(err);
+            }
+        });
+
         renderArticles(); // renderWhen:2
 
         return false;
